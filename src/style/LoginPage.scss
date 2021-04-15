@@ -1,0 +1,41 @@
+@import './utils.scss';
+
+
+.loginComp{
+    height: 76vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    form{
+        width: 30%;
+        .formBox{
+            display: flex;
+            justify-content: space-between;
+
+            padding: 20px 0;
+
+            label{
+                padding: 6px;
+            }
+
+            .inputBox{
+                width: 70%;
+                position: relative;
+
+                input{
+                    padding: 6px;
+                }
+                img{
+                    position: absolute;
+                    right:0;
+                    top:6px;
+                    width: 16px;
+                }    
+            
+            }
+            
+        }
+    }
+}

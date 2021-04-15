@@ -1,0 +1,40 @@
+@import './utils.scss';
+
+header{
+    &.gnb{
+        border-bottom: solid 1px $subColor;
+        box-shadow: 0 0 30px #f3f2f2;
+        width: 100%;
+    }
+
+    .container{
+        display: flex;
+        justify-content: space-between;
+        .mainNav{
+            display: flex;
+            .categoryNav{
+                font-weight: bold;
+                font-size: 1.5rem;
+                padding: 25px;
+                box-sizing: border-box;
+
+                &.active{
+                    // color: $mainColor;
+                    border-bottom: 2px solid $mainColor;
+                    padding: 25px 25px 23px !important;
+                }
+            }
+        }
+
+        .subNav{
+            display: flex;
+            align-items: center;
+        }
+        .subNav ul{display: flex; padding: 10px 0;}
+        .subNav li{ padding-right: 10px; font-size: 0.8rem; opacity: 0.7;}
+        .subNav li:after{ content: '|'; position: relative; left: 5px;}
+        .subNav .last{ padding-right: 0; }
+        .subNav .last:after{ content: ''; }
+    }
+    
+}
