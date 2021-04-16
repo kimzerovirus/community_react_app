@@ -1,0 +1,46 @@
+@import './utils.scss';
+
+form{
+    width: 30%;
+    .formBox{
+        display: flex;
+        justify-content: space-between;
+
+        padding: 20px 0;
+
+        label{
+            padding: 6px 0;
+        }
+
+        .inputBox{
+            width: 70%;
+            position: relative;
+
+            input{
+                box-sizing: border-box;
+                padding: 6px;
+            }
+            img{
+                position: absolute;
+                right:0;
+                top:6px;
+                width: 16px;
+            }    
+        
+        }
+    }
+
+    button{
+        margin-top: 30px;
+        width: 100%;
+        height: 50px;
+        background-color: #fff;
+        box-sizing: border-box;
+        border: 1px solid $mainColor;
+        color: $mainColor;
+    }
+    button:hover{
+        background-color: $mainColor;
+        color: $subColor;
+    }
+}

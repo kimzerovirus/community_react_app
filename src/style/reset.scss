@@ -74,6 +74,9 @@ border-radius:0;
 box-sizing:content-box;
 appearance:none;
 }
+input:focus, textarea:focus, button:focus{
+    outline: 1px solid $mainColor;
+}
 
 ::-moz-input-placeholder, ::-moz-textarea-placeholder{
 color:$mainColor;
