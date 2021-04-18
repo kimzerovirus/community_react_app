@@ -1,11 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../../style/LoginPage.scss'
 
 function LoginPage() {
 
+    const [Id, setId] = useState('');
+    const [Pwd, setPwd] = useState('');
+
+    const onIdHandler = e => {
+        setId(e.currentTarget.value)
+    }
+
+    const onPwdHandler = e => {
+        setPwd(e.currentTarget.value)
+    }
+
+
     const onSubmitHandler = e => {
         e.preventDefault();
-
+        alert(`${Id} // ${Pwd}`)
     }
 
     return (
@@ -16,7 +28,7 @@ function LoginPage() {
                 <div className="formBox">
                     <label htmlFor="id">아이디</label>
                     <div className="inputBox">
-                        <input type="text" name="id" />
+                        <input type="text" name="id" value={Id} onChange={onIdHandler} />
                         {/* <img src={process.env.PUBLIC_URL + '/icons/fail_icon.svg'} /> */}
                     </div>
 
@@ -26,7 +38,7 @@ function LoginPage() {
                 <div className="formBox">
                     <label htmlFor="pwd">비밀번호</label>
                     <div className="inputBox">
-                        <input type="password" name="pwd" />
+                        <input type="password" name="pwd" value={Pwd} onChange={onPwdHandler} />
                     </div>
                 </div>
 
