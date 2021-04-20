@@ -21,7 +21,7 @@ function LoginPage() {
     }
 
     return (
-        <div className="loginComp">
+        <div className="loginComp formComp">
             {/* <h1>로그인</h1> */}
             <form onSubmit={onSubmitHandler}>
 

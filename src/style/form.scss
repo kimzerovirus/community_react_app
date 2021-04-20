@@ -1,5 +1,12 @@
 @import './utils.scss';
 
+.formComp{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 form{
     width: 30%;
     .formBox{
