@@ -1,7 +1,16 @@
 import React, { useState } from 'react'
-import '../../style/LoginPage.scss'
 
-function LoginPage() {
+//style
+import '../../style/LoginPage.scss'
+import Swal from 'sweetalert2'
+
+//store
+import { useDispatch } from 'react-redux'
+import { loginUser } from '../../_actions/user_action'
+
+
+function LoginPage(props) {
+    const dispatch = useDispatch();
 
     const [Id, setId] = useState('');
     const [Pwd, setPwd] = useState('');
@@ -17,7 +26,42 @@ function LoginPage() {
 
     const onSubmitHandler = e => {
         e.preventDefault();
-        alert(`${Id} // ${Pwd}`)
+        // alert(`${Id} // ${Pwd}`)
+
+        let body = {
+            id: Id,
+            pwd: Pwd
+        }
+
+        let alertData = {
+            icon: 'error',
+            title: 'LOGIN ERROR',
+        }
+
+        if (body.id !== '' && body.pwd !== '') {
+            dispatch(loginUser(body))
+                .then(res => {
+                    if (res.payload.loginSuccess) {
+                        props.history.push('/')
+                    } else {
+                        Swal.fire(alertData)
+                    }
+                })
+        } else {
+            if (body.id === '') {
+                alertData = {
+                    icon: 'error',
+                    title: '아이디를 입력해주세요',
+                }
+            } else if (body.pwd === '') {
+                alertData = {
+                    icon: 'error',
+                    title: '비밀번호를 입력해주세요',
+                }
+            }
+            Swal.fire(alertData)
+        }
+
     }
 
     return (
