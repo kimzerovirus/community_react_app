@@ -1,7 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
-	const path = process.env.PUBLIC_URL;
 	const navigate = useNavigate();
 
 	const submitHandler = (e: React.SyntheticEvent) => {
