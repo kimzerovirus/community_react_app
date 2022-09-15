@@ -1,3 +1,5 @@
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
 import SearchIcon from '@mui/icons-material/Search';
 import { Box, Button, Container, Grid, IconButton, Toolbar, Typography } from '@mui/material';
 import * as React from 'react';
@@ -46,6 +48,9 @@ export default function Header() {
 						</Grid>
 					))}
 				</Grid>
+				<IconButton>
+					<Brightness7Icon />
+				</IconButton>
 				<IconButton>
 					<SearchIcon />
 				</IconButton>
