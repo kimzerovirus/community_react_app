@@ -1,8 +1,14 @@
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import { createTheme, ThemeProvider, useTheme } from '@mui/material/styles';
+import fs from 'fs';
+import matter from 'gray-matter';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import fs from 'fs';
 import path from 'path';
-import matter from 'gray-matter';
+import * as React from 'react';
 
 interface PostsProps {
 	posts: postProps[];
@@ -50,10 +56,7 @@ export async function getStaticProps() {
 
 	const posts = files.map(filename => {
 		const slug = filename.replace('.md', '');
-		const markdownWithMeta = fs.readFileSync(
-			path.join('posts', filename),
-			'utf-8',
-		);
+		const markdownWithMeta = fs.readFileSync(path.join('posts', filename), 'utf-8');
 
 		const { data: frontmatter } = matter(markdownWithMeta);
 
