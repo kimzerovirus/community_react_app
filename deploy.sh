@@ -2,7 +2,7 @@
 
 message=""
 
-if !["$*"=""]
+if !["$1"=""]
 then message=$*
 else message="New Deployment"
 fi
