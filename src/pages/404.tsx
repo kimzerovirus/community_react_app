@@ -12,17 +12,15 @@ export default function PageNotFound() {
 			<Lottie loop animationData={lottieJson} play style={{ width: `100%`, height: `100%` }} />
 
 			<Grid container justifyContent="center" mt={2}>
-				<Grid item>
-					<Typography component="h1" variant="h5">
-						해당 페이지를 찾지 못했습니다.
-					</Typography>
-				</Grid>
-				<Grid item>
-					<Link href="/" variant="body2">
-						메인페이지로 이동
-						{/* <HomeSharpIcon sx={{ fontSize: '0.875rem' }} /> */}
-					</Link>
-				</Grid>
+				<Typography component="h1" variant="h6">
+					해당 페이지를 찾지 못했습니다.
+				</Typography>
+			</Grid>
+			<Grid container justifyContent="center">
+				<Link href="/" variant="body2">
+					메인페이지로 이동
+					{/* <HomeSharpIcon sx={{ fontSize: '0.875rem' }} /> */}
+				</Link>
 			</Grid>
 		</Container>
 	);
