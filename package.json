@@ -8,6 +8,7 @@
     "export": "next export",
     "start": "next start",
     "deploy": "next build && next export && touch out/.nojekyll && gh-pages --add --dotfiles -d out",
+    "deploy-sh": "sh deploy.sh",
     "lint": "next lint"
   },
   "dependencies": {
