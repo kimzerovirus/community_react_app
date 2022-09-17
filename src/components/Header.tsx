@@ -14,7 +14,7 @@ export default function Header() {
 
 	return (
 		<Container maxWidth="xl">
-			<Toolbar>
+			<Toolbar disableGutters>
 				<h1>
 					<Typography
 						variant="h6"
@@ -32,8 +32,8 @@ export default function Header() {
 					</Typography>
 				</h1>
 				<Grid container justifyContent="flex-end">
-					{menuList.map(({ name, link }) => (
-						<Grid item>
+					{menuList.map(({ name, link }, idx) => (
+						<Grid item key={idx}>
 							<Button
 								component="a"
 								href={link}
@@ -48,10 +48,10 @@ export default function Header() {
 						</Grid>
 					))}
 				</Grid>
-				<IconButton>
-					<Brightness7Icon />
+				<IconButton color="inherit" sx={{ '&:hover': { color: '#FFD500' } }}>
+					<Brightness4Icon />
 				</IconButton>
-				<IconButton>
+				<IconButton href="/search" color="inherit">
 					<SearchIcon />
 				</IconButton>
 			</Toolbar>

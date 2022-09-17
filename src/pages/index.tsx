@@ -1,5 +1,4 @@
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
+import { Container } from '@mui/material';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import { createTheme, ThemeProvider, useTheme } from '@mui/material/styles';
@@ -26,7 +25,7 @@ interface postProps {
 
 export default function Home({ posts }: PostsProps) {
 	return (
-		<div>
+		<Container maxWidth="xl">
 			<Head>
 				<title>kimzerovirus.log</title>
 			</Head>
@@ -47,7 +46,7 @@ export default function Home({ posts }: PostsProps) {
 					</div>
 				))}
 			</div>
-		</div>
+		</Container>
 	);
 }
 

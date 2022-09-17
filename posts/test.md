@@ -7,3 +7,6 @@ cover_image: 'images/test.jpg'
 
 ## Heading
 - head
+```javascript
+const hello = 'hello';
+```
