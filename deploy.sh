@@ -2,13 +2,15 @@
 
 message=""
 
-if ["$1"=""]
-then message="New Deployment"
-else message=$*
+if !["$*"=""]
+then message=$*
+else message="New Deployment"
 fi
 
-git add -A
-git commit -m message
+git add .
+git commit -m "${message}"
 git push origin main
 
-npm run deploy
+# npm run deploy
+
+echo "커밋 메시지: ${message}"
