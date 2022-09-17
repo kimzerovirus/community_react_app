@@ -2,9 +2,9 @@
 
 message=""
 
-if !["$1"=""]
-then message=$*
-else message="New Deployment"
+if ["$1"=""]
+then message="New Deployment"
+else message=$*
 fi
 
 git add .
