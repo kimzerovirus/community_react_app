@@ -7,9 +7,9 @@ import * as React from 'react';
 export default function Header() {
 	const menuList = [
 		{ name: '홈', link: '/' },
-		{ name: '일상', link: '/' },
-		{ name: '프로젝트', link: '/' },
-		{ name: 'TIL', link: '/' },
+		// { name: '일상', link: '/' },
+		{ name: '프로젝트', link: '/post/project' },
+		{ name: 'TIL', link: '/post/til' },
 	];
 
 	return (

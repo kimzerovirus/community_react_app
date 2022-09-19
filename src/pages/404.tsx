@@ -2,9 +2,8 @@
 // import OpenInNewSharpIcon from '@mui/icons-material/OpenInNewSharp';
 // import HomeSharpIcon from '@mui/icons-material/HomeSharp';
 import { Container, Grid, Link, Typography } from '@mui/material';
+import lottieJson from 'public/cat.json';
 import Lottie from 'react-lottie-player';
-
-import lottieJson from '../../public/cat.json';
 
 export default function PageNotFound() {
 	return (

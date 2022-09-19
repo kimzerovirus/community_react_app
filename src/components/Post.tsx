@@ -1,7 +1,16 @@
+import { Card } from '@mui/material';
+import Link from 'next/link';
 import React from 'react';
+import { PostProps } from 'src/utils/staticDataUtils';
 
-function Post() {
-	return <div>Post</div>;
+interface PropsType {
+	post: PostProps;
 }
 
-export default Post;
+export default function Post({ post }: PropsType) {
+	return (
+		<Card>
+			<Link href={`/${post.folderPath}/${post.slug}`}>{post.frontmatter.title}</Link>
+		</Card>
+	);
+}
