@@ -11,7 +11,12 @@ export default function Home() {
 				<title>kimzerovirus.log</title>
 			</Head>
 
-			<Grid container alignItems="center" justifyContent="center" style={{ height: '80vh' }}>
+			<Grid
+				container
+				alignItems="center"
+				justifyContent="center"
+				style={{ height: '80vh', minHeight: '600px' }}
+			>
 				<Grid item xs={8} pr={12}>
 					<Typography component="h2" variant="h4" sx={{ fontWeight: 'bold' }}>
 						안녕하세요 빡빡이입니다!

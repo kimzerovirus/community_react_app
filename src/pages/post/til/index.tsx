@@ -1,4 +1,4 @@
-import PostList from 'src/components/PostList';
+import PostList from 'src/components/postLayout/PostList';
 import { PostsProps, readFile } from 'src/utils/staticDataUtils';
 
 export default function TIL({ posts }: PostsProps) {
