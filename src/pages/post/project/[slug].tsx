@@ -1,51 +1,21 @@
-import { Container } from '@mui/material';
 import fs from 'fs';
 import matter from 'gray-matter';
 import path from 'path';
-import { useEffect } from 'react';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import BlockquoteBlock from 'src/components/markdownBlocks/BlockquoteBlock';
-import CodeBlock from 'src/components/markdownBlocks/CodeBlock';
+import MarkDownView from 'src/components/postLayout/MarkDownView';
 import { makePath } from 'src/utils/staticDataUtils';
 
-export default function ProjectPostPage({ htmlString, data }: any) {
-	return (
-		<Container maxWidth="xl">
-			<ReactMarkdown
-				remarkPlugins={[remarkGfm]} // TODO link, table, checklist - styling
-				components={{
-					code: CodeBlock,
-					blockquote: BlockquoteBlock, // >
-					// img({ node, ...props }) {
-					// 	return (
-					// 		<img
-					// 			style={{ maxWidth: '60vw' }}
-					// 			src={props.src.replace('../../../../public/', '/')}
-					// 			alt="MarkdownRenderer__Image"
-					// 		/>
-					// 	);
-					// },
-					em({ node, children, ...props }) {
-						return (
-							<span style={{ fontStyle: 'italic' }} {...props}>
-								{children}
-							</span>
-						);
-					},
-					// table({ node, children, ...props }) {
-					// 	return <table></table>;
-					// },
-				}}
-			>
-				{htmlString
-					.replace(/\n\s\n\s/gi, '\n\n&nbsp;\n\n')
-					.replace(/\*\*/gi, '@$_%!^')
-					.replace(/@\$_%!\^/gi, '**')
-					.replace(/<\/?u>/gi, '*')}
-			</ReactMarkdown>
-		</Container>
-	);
+export interface StaticProps {
+	htmlstring: string;
+	data: {
+		title: string;
+		date: string;
+		except: string;
+		cover_image: string;
+	};
+}
+
+export default function ProjectPostPage({ htmlstring, data }: StaticProps) {
+	return <MarkDownView htmlstring={htmlstring} data={data} />;
 }
 
 export async function getStaticPaths() {
@@ -58,7 +28,7 @@ export async function getStaticProps({ params: { slug } }: any) {
 	const parsedMarkdown = matter(markdownWithMetaData);
 	return {
 		props: {
-			htmlString: parsedMarkdown.content,
+			htmlstring: parsedMarkdown.content,
 			data: parsedMarkdown.data,
 		},
 	};

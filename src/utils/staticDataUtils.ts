@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import fs from 'fs';
 import matter from 'gray-matter';
 import path from 'path';
@@ -67,9 +66,3 @@ export const makePath = (folderPath: string) => {
 		fallback: false,
 	};
 };
-
-export const getImgURL = () => {
-	return 'url';
-};
-
-export const dateFormat = (date: string, format = 'YYYY년 MM월 DD일') => dayjs(date).format(format);

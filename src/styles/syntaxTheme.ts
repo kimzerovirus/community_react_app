@@ -1,4 +1,6 @@
-interface SyntaxType {
+import { relative } from 'path';
+
+export interface SyntaxType {
 	[key: string]: React.CSSProperties;
 }
 
@@ -207,7 +209,7 @@ export const light: SyntaxType = {
 		wordBreak: 'normal',
 		wordWrap: 'normal',
 		color: '#000',
-		background: '#fafafa',
+		background: '#f6f6f6',
 		fontFamily: 'Roboto Mono, monospace',
 		fontSize: '1em',
 		lineHeight: '1.5em',
@@ -227,7 +229,7 @@ export const light: SyntaxType = {
 		wordBreak: 'normal',
 		wordWrap: 'normal',
 		color: '#90a4ae',
-		background: '#fafafa',
+		background: '#f6f6f6',
 		fontFamily: 'Roboto Mono, monospace',
 		fontSize: '1em',
 		lineHeight: '1.5em',

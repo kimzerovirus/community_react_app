@@ -14,7 +14,7 @@ export default function Header() {
 
 	return (
 		<Container maxWidth="xl">
-			<Toolbar disableGutters>
+			<Toolbar disableGutters variant="dense" sx={{ maxHeight: '80px' }}>
 				<h1>
 					<Typography
 						variant="h6"
@@ -26,6 +26,7 @@ export default function Header() {
 							fontWeight: 700,
 							color: 'inherit',
 							textDecoration: 'none',
+							lineHeight: '80px',
 						}}
 					>
 						KIMZEROVIRUS

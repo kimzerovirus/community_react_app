@@ -1,19 +1,12 @@
-import { useContext, useEffect, useState } from 'react';
 import { PrismAsync as SyntaxHighlighter } from 'react-syntax-highlighter';
 // import { twilight } from 'react-syntax-highlighter/dist/cjs/styles/prism';
-import { ThemeContext } from 'src/pages/_app';
+import { useDarkMode } from 'src/components/DarkModeProvider';
 
-import { dark, light } from './syntaxTheme';
 export default function CodeBlock({ node, inline, className, children, ...props }: any) {
-	const { isDark } = useContext(ThemeContext);
 	const match = /language-(\w+)/.exec(className || '');
+	const theme = useDarkMode();
 
-	const [theme, setTheme] = useState<any>();
-	useEffect(() => {
-		const th = isDark ? dark : light;
-		setTheme(th);
-	}, [isDark]); // style 에서 삼항 연산자 사용시에 next js 뭔가 오류가 있음 그래서 useeffect로 돌려버림
-
+	// TODO code copy button
 	return inline ? (
 		// 강조 (``)
 		<code

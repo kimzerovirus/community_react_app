@@ -2,7 +2,7 @@ import { Container } from '@mui/material';
 import React from 'react';
 import { PostsProps } from 'src/utils/staticDataUtils';
 
-import Post from './Post';
+import Post from './PostItem';
 
 function PostList({ posts }: PostsProps) {
 	return (
