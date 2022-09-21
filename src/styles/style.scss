@@ -1,0 +1,35 @@
+.blockquote {
+  margin: 0.5em 0;
+  padding: .5em 1.5em;
+  border-radius: 7px;
+  position: relative;
+
+  &.light{
+    background: #f6f6f6;
+  }
+
+  &.dark{
+    background: #2F2F2F;
+    color:#eee
+  }
+  
+  &:after {
+    content: "";
+    z-index: 9999;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: #6868ac;
+  }
+
+  ul, ol{
+    padding-left: 1em;
+  }
+}
+
+
+/* .markdown-style {
+
+} */

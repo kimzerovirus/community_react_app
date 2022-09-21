@@ -1,4 +1,4 @@
-import 'src/styles/style.css';
+import 'src/styles/style.scss';
 
 import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';

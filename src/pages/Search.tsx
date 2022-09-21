@@ -8,8 +8,8 @@ function Search() {
 	};
 
 	return (
-		<Container component="main" style={{ marginTop: '2rem', maxWidth: '768px' }}>
-			<Box component="form" onSubmit={handleSubmit} noValidate>
+		<Container component="main" maxWidth="md">
+			<Box component="form" onSubmit={handleSubmit} noValidate mt={6}>
 				<TextField
 					margin="normal"
 					placeholder="검색어를 입력해주세요"

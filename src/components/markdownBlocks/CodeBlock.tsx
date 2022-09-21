@@ -1,10 +1,12 @@
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { PrismAsync as SyntaxHighlighter } from 'react-syntax-highlighter';
 // import { twilight } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import { useDarkMode } from 'src/components/DarkModeProvider';
+import { dark, light } from 'src/styles/syntaxTheme';
 
 export default function CodeBlock({ node, inline, className, children, ...props }: any) {
 	const match = /language-(\w+)/.exec(className || '');
-	const theme = useDarkMode();
+	const style = useDarkMode(dark, light);
 
 	// TODO code copy button
 	return inline ? (
@@ -22,14 +24,14 @@ export default function CodeBlock({ node, inline, className, children, ...props 
 		</code>
 	) : match ? (
 		// 코드 (```)
-		<SyntaxHighlighter style={theme} language={match[1]} {...props}>
+		<SyntaxHighlighter style={style} language={match[1]} {...props}>
 			{String(children)
 				.replace(/\n$/, '')
 				.replace(/\n&nbsp;\n/g, '')
 				.replace(/\n&nbsp\n/g, '')}
 		</SyntaxHighlighter>
 	) : (
-		<SyntaxHighlighter style={theme} language="textile" {...props}>
+		<SyntaxHighlighter style={style} language="textile" {...props}>
 			{String(children).replace(/\n$/, '')}
 		</SyntaxHighlighter>
 	);

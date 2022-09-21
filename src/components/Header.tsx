@@ -20,7 +20,7 @@ export default function Header() {
 						variant="h6"
 						noWrap
 						component="a"
-						href="/"
+						href="https://github.com/kimzerovirus"
 						sx={{
 							mr: 2,
 							fontWeight: 700,
