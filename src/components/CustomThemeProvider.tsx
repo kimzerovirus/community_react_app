@@ -36,25 +36,33 @@ const initialTheme = (): ColorMode => {
 
 export default function CustomThemeProvider({ children }: PorpsType) {
 	const [mode, setMode] = useState(initialTheme());
+	const [loaded, setLoaded] = useState(false);
+	useEffect(() => setLoaded(true), []); // https://stackoverflow.com/questions/55271855/react-material-ui-ssr-warning-prop-d-did-not-match-server-m-0-0-h-24-v-2
 
 	const value = useMemo(
 		() => ({
 			toggleColorMode: () => {
-				if (typeof window !== 'undefined') {
-					setMode(prev => (prev === ColorMode.light ? ColorMode.dark : ColorMode.light));
-					window.localStorage.setItem('theme', mode);
-				}
+				setMode(prev => {
+					const mode = prev === ColorMode.light ? ColorMode.dark : ColorMode.light;
+					if (typeof window !== 'undefined') window.localStorage.setItem('theme', mode);
+
+					return mode;
+				});
 			},
 			mode,
 		}),
 		[mode],
 	);
 
-	return (
-		<ThemeContext.Provider value={value}>
-			<ThemeProvider theme={mode === 'light' ? lightTheme : darkTheme}>{children}</ThemeProvider>
-		</ThemeContext.Provider>
-	);
+	if (loaded) {
+		return (
+			<ThemeContext.Provider value={value}>
+				<ThemeProvider theme={mode === 'light' ? lightTheme : darkTheme}>{children}</ThemeProvider>
+			</ThemeContext.Provider>
+		);
+	} else {
+		return <div style={{ display: 'none' }}>{children}</div>;
+	}
 }
 
 export const useTheme = (): ColorMode => {
