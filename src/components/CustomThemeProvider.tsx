@@ -7,7 +7,7 @@ interface PorpsType {
 }
 
 interface ContextType {
-	isDark: ColorMode.light | ColorMode.dark;
+	mode: ColorMode.light | ColorMode.dark;
 	toggleColorMode: () => void;
 }
 
@@ -18,46 +18,53 @@ export enum ColorMode {
 
 export const ThemeContext = createContext<ContextType>({} as ContextType);
 
-const initialTheme = (): boolean => {
+const initialTheme = (): ColorMode => {
 	if (typeof window !== 'undefined') {
 		const localTheme = window.localStorage.getItem('theme');
+
 		if (localTheme === ColorMode.dark) {
-			return true;
+			return ColorMode.dark;
 		} else if (localTheme === ColorMode.light) {
-			return false;
+			return ColorMode.light;
+		} else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			return ColorMode.dark;
 		}
-		return window.matchMedia('(prefers-color-scheme: dark)').matches;
 	}
-	return false;
+
+	return ColorMode.light;
 };
 
 export default function CustomThemeProvider({ children }: PorpsType) {
-	const [isDark, setIsDark] = useState(ColorMode.light);
+	const [mode, setMode] = useState(initialTheme());
+
 	const value = useMemo(
 		() => ({
 			toggleColorMode: () => {
-				setIsDark(prev => (prev === ColorMode.light ? ColorMode.dark : ColorMode.light));
+				if (typeof window !== 'undefined') {
+					setMode(prev => (prev === ColorMode.light ? ColorMode.dark : ColorMode.light));
+					window.localStorage.setItem('theme', mode);
+				}
 			},
-			isDark,
+			mode,
 		}),
-		[isDark],
+		[mode],
 	);
 
 	return (
 		<ThemeContext.Provider value={value}>
-			<ThemeProvider theme={isDark === 'light' ? lightTheme : darkTheme}>{children}</ThemeProvider>
+			<ThemeProvider theme={mode === 'light' ? lightTheme : darkTheme}>{children}</ThemeProvider>
 		</ThemeContext.Provider>
 	);
 }
 
 export const useTheme = (): ColorMode => {
-	const [theme, setTheme] = useState(ColorMode.light);
-	const { isDark } = useContext(ThemeContext);
+	const { mode } = useContext(ThemeContext);
+	const [theme, setTheme] = useState(mode);
 
 	useMemo(() => {
-		const pickedTheme = isDark === ColorMode.light ? ColorMode.light : ColorMode.dark;
+		const pickedTheme = mode === ColorMode.light ? ColorMode.light : ColorMode.dark;
 		setTheme(pickedTheme);
-	}, [isDark]);
+	}, [mode]);
 
 	return theme;
 };

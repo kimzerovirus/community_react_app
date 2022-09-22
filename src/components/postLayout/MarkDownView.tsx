@@ -9,7 +9,8 @@ import { dateFormat } from 'src/utils/dateFormat';
 
 function MarkDownView({ htmlstring, data }: StaticProps) {
 	return (
-		<div style={{ borderTop: '1px solid #ddd', width: '100%' }}>
+		// <div style={{ borderTop: '1px solid #ddd', width: '100%' }}>
+		<div>
 			<Container maxWidth="md">
 				<Typography
 					variant="h3"

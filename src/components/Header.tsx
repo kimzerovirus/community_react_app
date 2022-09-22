@@ -1,11 +1,11 @@
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
+import { DarkMode, LightMode, ModeNight } from '@mui/icons-material';
+// import Brightness4Icon from '@mui/icons-material/Brightness4';
+// import Brightness7Icon from '@mui/icons-material/Brightness7';
 import SearchIcon from '@mui/icons-material/Search';
 import { Button, Container, Grid, IconButton, Toolbar, Typography } from '@mui/material';
 import { useContext } from 'react';
 
 import { ColorMode, ThemeContext, useTheme, useToggleTheme } from './CustomThemeProvider';
-
 const menuList = [
 	{ name: '홈', link: '/' },
 	// { name: '일상', link: '/' },
@@ -14,24 +14,28 @@ const menuList = [
 ];
 
 const DarkToggleButton = () => (
-	<IconButton color="inherit" sx={{ '&:hover': { color: '#FFD500' } }}>
-		<Brightness4Icon />
+	<IconButton color="inherit" sx={{ '&:hover': { color: '#e66b27' } }}>
+		<LightMode />
 	</IconButton>
 );
 
 const LightToggleButton = () => (
-	<IconButton color="inherit" sx={{ '&:hover': { color: '#e66b27' } }}>
-		<Brightness7Icon />
+	<IconButton color="inherit" sx={{ '&:hover': { color: '#FFD500' } }}>
+		<ModeNight />
 	</IconButton>
 );
 
 const ThemeToggleButton = () => {
-	return useTheme() === ColorMode.light ? <LightToggleButton /> : <DarkToggleButton />;
+	const { toggleColorMode } = useContext(ThemeContext);
+
+	return (
+		<div onClick={toggleColorMode}>
+			{useTheme() === ColorMode.light ? <LightToggleButton /> : <DarkToggleButton />}
+		</div>
+	);
 };
 
 export default function Header() {
-	const { toggleColorMode } = useContext(ThemeContext);
-
 	return (
 		<Container maxWidth="xl">
 			<Toolbar disableGutters variant="dense" sx={{ maxHeight: '80px' }}>
@@ -69,9 +73,7 @@ export default function Header() {
 						</Grid>
 					))}
 				</Grid>
-				<div onClick={toggleColorMode}>
-					<ThemeToggleButton />
-				</div>
+				<ThemeToggleButton />
 				<IconButton href="/search" color="inherit">
 					<SearchIcon />
 				</IconButton>
