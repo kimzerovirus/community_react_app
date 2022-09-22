@@ -1,38 +1,53 @@
+import { useEffect, useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { PrismAsync as SyntaxHighlighter } from 'react-syntax-highlighter';
 // import { twilight } from 'react-syntax-highlighter/dist/cjs/styles/prism';
-import { useDarkMode } from 'src/components/DarkModeProvider';
-import { dark, light } from 'src/styles/syntaxTheme';
+import { useTheme } from 'src/components/CustomThemeProvider';
+import { CopyIcon, PasteIcon } from 'src/components/Icons';
+import syntaxTheme from 'src/styles/theme/syntaxTheme';
 
 export default function CodeBlock({ node, inline, className, children, ...props }: any) {
 	const match = /language-(\w+)/.exec(className || '');
-	const style = useDarkMode(dark, light);
+	const style = useTheme();
+	const [copied, setCopied] = useState(false);
+
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setCopied(false);
+		}, 1000);
+		return () => clearTimeout(timer);
+	}, [copied]);
 
 	// TODO code copy button
 	return inline ? (
 		// 강조 (``)
-		<code
-			style={{
-				background:
-					'linear-gradient( to right, var(--sub-highlight-color) 15%, var(--highlight-color) 85%, var(--sub-highlight-color) )',
-				padding: '2px',
-				borderRadius: '7px',
-			}}
-			{...props}
-		>
-			{children}
+		<code className="primary" style={{ fontWeight: 'bold' }} {...props}>
+			`{children}`
 		</code>
 	) : match ? (
 		// 코드 (```)
-		<SyntaxHighlighter style={style} language={match[1]} {...props}>
-			{String(children)
-				.replace(/\n$/, '')
-				.replace(/\n&nbsp;\n/g, '')
-				.replace(/\n&nbsp\n/g, '')}
-		</SyntaxHighlighter>
+		<div className="code">
+			<div className="copy-alert" style={copied ? { display: 'block' } : { display: 'none' }}>
+				Code Copied...
+			</div>
+			<CopyToClipboard text={children} onCopy={() => setCopied(true)}>
+				<button className="icon copy-icon">{copied ? <PasteIcon /> : <CopyIcon />}</button>
+			</CopyToClipboard>
+			<SyntaxHighlighter style={syntaxTheme[style]} language={match[1]} {...props}>
+				{String(children)
+					.replace(/\n$/, '')
+					.replace(/\n&nbsp;\n/g, '')
+					.replace(/\n&nbsp\n/g, '')}
+			</SyntaxHighlighter>
+		</div>
 	) : (
-		<SyntaxHighlighter style={style} language="textile" {...props}>
-			{String(children).replace(/\n$/, '')}
-		</SyntaxHighlighter>
+		<div className="code">
+			<CopyToClipboard text={children} onCopy={() => setCopied(true)}>
+				<button className="icon copy-icon">{copied ? <PasteIcon /> : <CopyIcon />}</button>
+			</CopyToClipboard>
+			<SyntaxHighlighter style={syntaxTheme[style]} language="textile" {...props}>
+				{String(children).replace(/\n$/, '')}
+			</SyntaxHighlighter>
+		</div>
 	);
 }

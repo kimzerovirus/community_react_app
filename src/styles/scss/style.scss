@@ -1,0 +1,82 @@
+@import "./colors.scss";
+
+.primary {
+  color: $primary;
+}
+
+.markdown-style {
+  h1,
+  h2 {
+    // color: $primary;
+    // border-bottom: 1px solid $primary;
+  }
+
+  .code {
+    position: relative;
+    
+    &:hover .copy-icon{
+      display: block;
+    }
+
+    .copy-alert {
+      color: $primary;
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      z-index: 1000;
+    }
+
+    .copy-icon {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1000;
+      display: none;
+    }
+
+    svg {
+      width: 1.5rem;
+    }
+    button.icon {
+      background: none;
+      outline: none;
+      border: none;
+      cursor: pointer;
+    }
+  }
+
+  .blockquote {
+    margin: 0.5em 0;
+    padding: 0.5em 1.5em;
+    border-radius: 7px;
+    position: relative;
+
+    &.light {
+      background: $light;
+    }
+
+    &.dark {
+      background: $dark;
+      color: #eee;
+    }
+
+    &:after {
+      content: "";
+      z-index: 9999;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: $primary;
+    }
+
+    ul,
+    ol {
+      padding-left: 1em;
+    }
+  }
+}
+/* .markdown-style {
+
+} */

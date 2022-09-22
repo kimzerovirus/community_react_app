@@ -1,12 +1,10 @@
-import { useDarkMode } from '../DarkModeProvider';
+import { useTheme } from '../CustomThemeProvider';
 
 export default function BlockquoteBlock({ node, children, ...props }: any) {
-	const dark = 'blockquote dark';
-	const light = 'blockquote light';
-	const style = useDarkMode(dark, light);
+	const style = useTheme();
 
 	return (
-		<div className={style} {...props}>
+		<div className={`blockquote ${style}`} {...props}>
 			{children}
 		</div>
 	);
