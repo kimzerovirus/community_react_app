@@ -42,12 +42,7 @@ export default function Home() {
 
 				{/* 맥시멈 1024, 이하는 한 줄 내리는 레이아웃으로 만들어야 됨 */}
 				<Grid item xs sx={{ display: 'flex', justifyContent: 'center' }}>
-					<Lottie
-						loop
-						animationData={lottieJson}
-						play
-						style={{ width: `100%`, height: `100%`, maxWidth: `400px` }}
-					/>
+					<Lottie loop animationData={lottieJson} play style={{ width: `100%`, height: `100%` }} />
 				</Grid>
 			</Grid>
 		</Container>

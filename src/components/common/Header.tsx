@@ -105,7 +105,7 @@ export default function Header() {
 						KIMZEROVIRUS
 					</Typography>
 				</h1>
-				<Grid container justifyContent="flex-end">
+				<Grid container>
 					{menuList.map(({ name, link }, idx) => (
 						<Grid item key={idx}>
 							<Button
