@@ -5,12 +5,13 @@ import { LightMode, ModeNight } from '@mui/icons-material';
 import SearchIcon from '@mui/icons-material/Search';
 import { Button, Container, Grid, IconButton, Toolbar, Typography } from '@mui/material';
 import { useContext } from 'react';
+import { animated, useTransition } from 'react-spring';
 
 import { ColorMode, ThemeContext, useTheme, useToggleTheme } from '../CustomThemeProvider';
 const menuList = [
-	{ name: '홈', link: '/' },
+	{ name: 'HOME', link: '/' },
 	// { name: '일상', link: '/' },
-	{ name: '프로젝트', link: '/post/project' },
+	{ name: 'PROJECT', link: '/post/project' },
 	{ name: 'TIL', link: '/post/til' },
 ];
 
@@ -28,22 +29,51 @@ const LightToggleButton = () => (
 
 const ThemeToggleButton = () => {
 	const { toggleColorMode } = useContext(ThemeContext);
+	const isDark = useTheme() === ColorMode.dark;
+
+	const transitions = useTransition(isDark, {
+		initial: {
+			transform: 'scale(1) rotate(0deg)',
+			opacity: 1,
+		},
+		from: {
+			transform: 'scale(0) rotate(-180deg)',
+			opacity: 0,
+		},
+		enter: {
+			transform: 'scale(1) rotate(0deg)',
+			opacity: 1,
+		},
+		leave: {
+			transform: 'scale(0) rotate(180deg)',
+			opacity: 0,
+		},
+
+		reverse: true,
+	});
 
 	return (
 		<div onClick={toggleColorMode}>
-			{useTheme() === ColorMode.light ? <LightToggleButton /> : <DarkToggleButton />}
+			{transitions((style, item) =>
+				item ? (
+					<Positioner>
+						<animated.div style={style}>
+							<LightToggleButton />
+						</animated.div>
+					</Positioner>
+				) : (
+					<Positioner>
+						<animated.div style={style}>
+							<DarkToggleButton />
+						</animated.div>
+					</Positioner>
+				),
+			)}
 		</div>
 	);
 };
 
 const ButtonGroup = () => {
-	const Group = styled.div`
-		display: flex;
-		/* background-color: #6868ac;
-		border-radius: 1rem;
-		color: #fff; */
-	`;
-
 	return (
 		<Group>
 			<ThemeToggleButton />
@@ -85,6 +115,7 @@ export default function Header() {
 									color: 'inherit',
 									fontSize: '1rem',
 									textDecoration: 'none',
+									minWidth: '0',
 								}}
 							>
 								{name}
@@ -98,3 +129,21 @@ export default function Header() {
 		</Container>
 	);
 }
+
+const Positioner = styled.div`
+	position: relative;
+	width: 40px;
+	div {
+		position: absolute;
+		top: 0;
+		left: 0;
+		transform: translate(-50%, -50%);
+	}
+`;
+
+const Group = styled.div`
+	display: flex;
+	/* background-color: #6868ac;
+	border-radius: 1rem;
+	color: #fff; */
+`;

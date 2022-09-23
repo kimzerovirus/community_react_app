@@ -16,8 +16,6 @@ export enum ColorMode {
 	dark = 'dark',
 }
 
-export const ThemeContext = createContext<ContextType>({} as ContextType);
-
 const initialTheme = (): ColorMode => {
 	if (typeof window !== 'undefined') {
 		const localTheme = window.localStorage.getItem('theme');
@@ -33,6 +31,8 @@ const initialTheme = (): ColorMode => {
 
 	return ColorMode.light;
 };
+
+export const ThemeContext = createContext({} as ContextType);
 
 export default function CustomThemeProvider({ children }: PorpsType) {
 	const [mode, setMode] = useState(initialTheme());
@@ -54,15 +54,13 @@ export default function CustomThemeProvider({ children }: PorpsType) {
 		[mode],
 	);
 
-	if (loaded) {
-		return (
-			<ThemeContext.Provider value={value}>
-				<ThemeProvider theme={mode === 'light' ? lightTheme : darkTheme}>{children}</ThemeProvider>
-			</ThemeContext.Provider>
-		);
-	} else {
-		return <div style={{ display: 'none' }}>{children}</div>;
-	}
+	return loaded ? (
+		<ThemeContext.Provider value={value}>
+			<ThemeProvider theme={mode === 'light' ? lightTheme : darkTheme}>{children}</ThemeProvider>
+		</ThemeContext.Provider>
+	) : (
+		<></>
+	);
 }
 
 export const useTheme = (): ColorMode => {

@@ -1,11 +1,9 @@
 ---
-title: 'Test post'
+title: '자료구조'
 date: '2022-07-09'
 except: 'This is except'
 cover_image: 'images/test.jpg'
 ---
-
-# 자료구조
 
 ## 스택
 > 스택은 삽입과 삭제 연산이 후입선출로 이루어진 자료구조이다. 따라서 자료구조의 최상단에서만 변화가 이루어진다.
