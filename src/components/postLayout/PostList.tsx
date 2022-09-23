@@ -1,13 +1,13 @@
+import styled from '@emotion/styled';
 import { Container } from '@mui/material';
-import React from 'react';
 import { PostsProps } from 'src/utils/staticDataUtils';
 
 import Post from './PostItem';
 
-function PostList({ posts }: PostsProps) {
+export default function PostList({ posts }: PostsProps) {
 	return (
-		<Container maxWidth="xl">
-			<div className="posts">
+		<Container maxWidth="md">
+			<PostListWrapper>
 				{posts.map((post, index) => (
 					// <div key={index}>
 					// 	<h3>{post.frontmatter.title}</h3>
@@ -21,11 +21,19 @@ function PostList({ posts }: PostsProps) {
 					// 	/>
 					// 	<p>{post.frontmatter.date}</p>
 					// </div>
-					<Post post={post} key={index} />
+					<Post
+						folderPath={post.folderPath}
+						frontmatter={post.frontmatter}
+						slug={post.slug}
+						key={index}
+					/>
 				))}
-			</div>
+			</PostListWrapper>
 		</Container>
 	);
 }
 
-export default PostList;
+const PostListWrapper = styled.ul`
+	list-style: none;
+	padding: 0;
+`;

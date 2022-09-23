@@ -35,8 +35,10 @@ export const readFile = (folderPath: string) => {
 	const posts = files.map(filename => {
 		const slug = filename.replace('.md', '');
 		const markdownWithMeta = fs.readFileSync(path.join(folderPath, filename), 'utf-8');
+		const { data: frontmatter, content } = matter(markdownWithMeta);
 
-		const { data: frontmatter } = matter(markdownWithMeta);
+		const reg = /[`~@#$%^&*()_|+\-='",<>\{\}\[\]\\\/]/gim;
+		frontmatter.except = content.replace(reg, '');
 
 		return {
 			folderPath,

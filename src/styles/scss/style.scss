@@ -12,6 +12,12 @@
     // border-bottom: 1px solid $primary;
   }
 
+  a{
+    color: $primary;
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
   .code {
     position: relative;
 
