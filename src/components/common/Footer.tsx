@@ -1,5 +1,4 @@
 import { Container, Typography } from '@mui/material';
-import { flexbox } from '@mui/system';
 
 export default function Footer() {
 	const year = new Date().getFullYear();

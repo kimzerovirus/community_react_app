@@ -1,11 +1,12 @@
-import { DarkMode, LightMode, ModeNight } from '@mui/icons-material';
+import styled from '@emotion/styled';
+import { LightMode, ModeNight } from '@mui/icons-material';
 // import Brightness4Icon from '@mui/icons-material/Brightness4';
 // import Brightness7Icon from '@mui/icons-material/Brightness7';
 import SearchIcon from '@mui/icons-material/Search';
 import { Button, Container, Grid, IconButton, Toolbar, Typography } from '@mui/material';
 import { useContext } from 'react';
 
-import { ColorMode, ThemeContext, useTheme, useToggleTheme } from './CustomThemeProvider';
+import { ColorMode, ThemeContext, useTheme, useToggleTheme } from '../CustomThemeProvider';
 const menuList = [
 	{ name: '홈', link: '/' },
 	// { name: '일상', link: '/' },
@@ -32,6 +33,24 @@ const ThemeToggleButton = () => {
 		<div onClick={toggleColorMode}>
 			{useTheme() === ColorMode.light ? <LightToggleButton /> : <DarkToggleButton />}
 		</div>
+	);
+};
+
+const ButtonGroup = () => {
+	const Group = styled.div`
+		display: flex;
+		/* background-color: #6868ac;
+		border-radius: 1rem;
+		color: #fff; */
+	`;
+
+	return (
+		<Group>
+			<ThemeToggleButton />
+			<IconButton href="/search" color="inherit">
+				<SearchIcon />
+			</IconButton>
+		</Group>
 	);
 };
 
@@ -73,10 +92,8 @@ export default function Header() {
 						</Grid>
 					))}
 				</Grid>
-				<ThemeToggleButton />
-				<IconButton href="/search" color="inherit">
-					<SearchIcon />
-				</IconButton>
+
+				<ButtonGroup />
 			</Toolbar>
 		</Container>
 	);
