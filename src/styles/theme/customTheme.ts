@@ -1,6 +1,16 @@
 import { colors } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 
+const breakpoints = {
+	values: {
+		xs: 0,
+		sm: 760,
+		md: 900,
+		lg: 1200,
+		xl: 1320,
+	},
+};
+
 export const darkTheme = createTheme({
 	palette: {
 		mode: 'dark',
@@ -11,6 +21,7 @@ export const darkTheme = createTheme({
 			default: '#0d1117',
 		},
 	},
+	breakpoints,
 });
 
 export const lightTheme = createTheme({
@@ -26,4 +37,5 @@ export const lightTheme = createTheme({
 			main: colors.red.A400,
 		},
 	},
+	breakpoints,
 });

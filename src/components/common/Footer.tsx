@@ -5,7 +5,15 @@ export default function Footer() {
 
 	return (
 		<Container maxWidth="xl" sx={{ display: 'flex', justifyContent: 'center', padding: '3rem 0' }}>
-			<Typography component="p" variant="body2">
+			<Typography
+				component="a"
+				variant="body2"
+				href="https://github.com/kimzerovirus"
+				sx={{
+					textDecoration: 'none',
+					color: 'inherit',
+				}}
+			>
 				{year} © KIMZEROVIRUS.
 			</Typography>
 		</Container>

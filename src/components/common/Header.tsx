@@ -1,13 +1,15 @@
 import styled from '@emotion/styled';
-import { LightMode, ModeNight } from '@mui/icons-material';
+import { DarkMode, LightMode, ModeNight, Nightlight } from '@mui/icons-material';
 // import Brightness4Icon from '@mui/icons-material/Brightness4';
 // import Brightness7Icon from '@mui/icons-material/Brightness7';
 import SearchIcon from '@mui/icons-material/Search';
 import { Button, Container, Grid, IconButton, Toolbar, Typography } from '@mui/material';
+import { Box } from '@mui/system';
 import { useContext } from 'react';
 import { animated, useTransition } from 'react-spring';
 
 import { ColorMode, ThemeContext, useTheme, useToggleTheme } from '../CustomThemeProvider';
+import SideBar from './SideBar';
 const menuList = [
 	{ name: 'HOME', link: '/' },
 	// { name: '일상', link: '/' },
@@ -23,7 +25,7 @@ const DarkToggleButton = () => (
 
 const LightToggleButton = () => (
 	<IconButton color="inherit" sx={{ '&:hover': { color: '#FFD500' } }}>
-		<ModeNight />
+		<Nightlight sx={{ transform: 'rotate(-45deg)' }} />
 	</IconButton>
 );
 
@@ -73,17 +75,18 @@ const ThemeToggleButton = () => {
 	);
 };
 
-const ButtonGroup = () => {
+export const ButtonGroup = () => {
 	return (
-		<Group>
+		<>
 			<ThemeToggleButton />
 			<IconButton href="/search" color="inherit">
 				<SearchIcon />
 			</IconButton>
-		</Group>
+		</>
 	);
 };
 
+/* TODO 모바일 사이즈에서는 돋보기가 없어지고 햄버거 메뉴로 통합 */
 export default function Header() {
 	return (
 		<Container maxWidth="xl">
@@ -105,9 +108,13 @@ export default function Header() {
 						KIMZEROVIRUS
 					</Typography>
 				</h1>
-				<Grid container>
-					{menuList.map(({ name, link }, idx) => (
-						<Grid item key={idx}>
+				<Grid
+					container
+					// justifyContent="flex-end"
+					sx={{ display: { xs: 'none', sm: 'flex' } }}
+				>
+					{menuList.map(({ name, link }) => (
+						<Grid item key={name}>
 							<Button
 								component="a"
 								href={link}
@@ -124,7 +131,16 @@ export default function Header() {
 					))}
 				</Grid>
 
-				<ButtonGroup />
+				<Box sx={{ display: { xs: 'none', sm: 'flex' } }}>
+					<Group>
+						<ButtonGroup />
+					</Group>
+				</Box>
+				<Box
+					sx={{ display: { xs: 'flex', sm: 'none' }, width: '100%', justifyContent: 'flex-end' }}
+				>
+					<SideBar menuList={menuList} />
+				</Box>
 			</Toolbar>
 		</Container>
 	);
@@ -142,7 +158,10 @@ const Positioner = styled.div`
 `;
 
 const Group = styled.div`
+	width: 100%;
 	display: flex;
+	justify-content: flex-end;
+
 	/* background-color: #6868ac;
 	border-radius: 1rem;
 	color: #fff; */

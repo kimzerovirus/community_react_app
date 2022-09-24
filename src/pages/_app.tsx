@@ -10,7 +10,7 @@ import { WrappedComponent, Wrapper } from 'src/styles/WrapperStyle';
 import { usePreventCopy } from 'src/utils/usePreventCopy';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
-	usePreventCopy();
+	// usePreventCopy();
 
 	return (
 		<CustomThemeProvider>
