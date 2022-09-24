@@ -23,7 +23,7 @@ const SideBar = ({ menuList }: any) => {
 									href={link}
 									sx={{
 										color: 'inherit',
-										fontSize: '1rem',
+										fontSize: '1.5rem',
 										textDecoration: 'none',
 										display: 'block',
 										width: '100%',
