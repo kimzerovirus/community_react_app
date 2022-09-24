@@ -64,7 +64,7 @@ const TitleTypo = styled.h1`
 	font-size: 3rem;
 	margin-top: 6rem;
 
-	@media (max-width: 767px) {
+	@media (max-width: 760px) {
 		//모바일
 		margin-top: 1rem;
 		font-size: 2rem;

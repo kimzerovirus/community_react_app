@@ -44,10 +44,18 @@ const PostIteWrapper = styled.li`
 		text-decoration: none;
 		color: inherit;
 	}
-	margin: 56px 0;
+	margin: 3rem 0;
 	text-decoration: none;
 	display: block;
 	/* border-bottom: 1px solid #afafaf; */
+	@media (max-width: 760px) {
+		//모바일
+		margin: 2rem 0;
+
+		&:first-child {
+			margin-top: 0;
+		}
+	}
 `;
 
 const TextWrapper = styled.div`
