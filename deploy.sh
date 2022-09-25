@@ -13,4 +13,4 @@ git push origin main
 
 npm run deploy
 
-echo "커밋 메시지: ${message}"
+echo "커밋 메시지 [ ${message} ]"
