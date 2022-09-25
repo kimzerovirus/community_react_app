@@ -15,10 +15,9 @@ export default function MarkDownView({ htmlstring, data }: StaticProps) {
 			<Container maxWidth="md">
 				<TitleTypo>{data.title}</TitleTypo>
 				<Typography
-					variant="body1"
+					variant="body2"
 					noWrap
 					component="p"
-					mt={1}
 					mb={6}
 					sx={{
 						color: '#afafaf',
@@ -62,11 +61,12 @@ const TitleTypo = styled.h1`
 	width: 100%;
 	display: block;
 	font-size: 3rem;
-	margin-top: 6rem;
+	margin: 6rem 0 0;
+	word-break: keep-all;
 
 	@media (max-width: 760px) {
 		//모바일
-		margin-top: 1rem;
+		margin: 1rem 0 0;
 		font-size: 2rem;
 	}
 `;

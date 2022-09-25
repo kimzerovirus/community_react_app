@@ -10,21 +10,22 @@ export default function PostItem({ folderPath, frontmatter, slug }: PostProps) {
 			<a href={`/${folderPath}/${slug}`}>
 				<Typography
 					variant="h5"
-					noWrap
+					// noWrap // 한 줄 ...
 					component="h2"
 					color="primary"
 					sx={{
 						fontWeight: 700,
+						wordBreak: 'keep-all',
 					}}
 				>
 					{frontmatter.title}
 				</Typography>
 				<Typography
-					variant="body1"
+					variant="body2"
 					noWrap
 					component="p"
 					sx={{
-						color: 'inherit',
+						color: '#afafaf',
 					}}
 				>
 					{dateFormat(frontmatter.date)}
