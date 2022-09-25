@@ -4,7 +4,7 @@ export default function Footer() {
 	const year = new Date().getFullYear();
 
 	return (
-		<Container maxWidth="xl" sx={{ display: 'flex', justifyContent: 'center', padding: '3rem 0' }}>
+		<Container maxWidth="xl" sx={{ display: 'flex', justifyContent: 'center', padding: '2rem 0' }}>
 			<Typography
 				component="a"
 				variant="body2"

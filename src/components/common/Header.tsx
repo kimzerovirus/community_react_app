@@ -11,10 +11,10 @@ import { animated, useTransition } from 'react-spring';
 import { ColorMode, ThemeContext, useTheme, useToggleTheme } from '../CustomThemeProvider';
 import SideBar from './SideBar';
 const menuList = [
-	{ name: 'HOME', link: '/' },
+	{ name: 'home', link: '/' },
 	// { name: '일상', link: '/' },
-	{ name: 'PROJECT', link: '/post/project' },
-	{ name: 'TIL', link: '/post/til' },
+	{ name: 'projects', link: '/post/project' },
+	{ name: 'til', link: '/post/til' },
 ];
 
 const DarkToggleButton = () => (

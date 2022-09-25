@@ -12,7 +12,7 @@
     // border-bottom: 1px solid $primary;
   }
 
-  a{
+  a {
     color: $primary;
     font-weight: bold;
     text-decoration: underline;
@@ -88,18 +88,25 @@
 
 } */
 
-.mobile{
+.mobile {
   display: none;
 
-	@media (max-width: 760px) {
-		display: block;
-	}
+  @media (max-width: 760px) {
+    display: block;
+  }
 }
 
-.non-mobile{
+.non-mobile {
   display: none;
 
-	@media (min-width: 761px) {
-		display: block;
-	}
+  @media (min-width: 761px) {
+    display: block;
+  }
+}
+
+ul,
+ol {
+  @media (max-width: 760px) {
+    padding-left: 1rem;
+  }
 }

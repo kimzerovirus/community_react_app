@@ -16,7 +16,7 @@ export default function Home() {
 				<Grid item sx={{ display: 'flex', justifyContent: 'center' }}>
 					<MainImage />
 				</Grid>
-				<Grid item>
+				<Grid item mt={3}>
 					<MainTypo />
 				</Grid>
 			</Grid>
@@ -49,11 +49,16 @@ const MainTypo = () => {
 				variant="h4"
 				sx={{ fontWeight: 'bold', textAlign: { xs: 'center', sm: 'left' } }}
 			>
-				안녕하세요<span> </span>
+				{/* 안녕하세d요<span> </span>
 				<br className="mobile" />
 				빡빡이입니다!
 				<br />
-				오늘도 빡코딩?
+				오늘도 빡코딩? */}
+				HI,
+				<br />
+				I'M KIMZEROVIRUS
+				<br />
+				WEB DEVELOPER.
 			</Typography>
 
 			<Typography
@@ -63,12 +68,9 @@ const MainTypo = () => {
 				mb={3}
 				sx={{ textAlign: { xs: 'center', sm: 'left' } }}
 			>
-				인간의 그들의 가장 피다. 천고에 것은 끝까지 풍부하게 그것을 풀이 길지 피다. 굳세게 인생의
-				사람은 따뜻한 시들어 끓는 그들에게 튼튼하며, 위하여, 듣는다. 가치를 그림자는 이것은 자신과
-				듣기만 소리다.이것은 이것이다. 얼마나 위하여 뜨거운지라, 철환하였는가? 위하여서, 그들의 피고
-				되려니와, 봄바람을 남는 영락과 천지는 같은 것이다. 만물은 황금시대를 투명하되 그림자는 전인
-				우리는 가는 무엇을 있으랴? 이상 이것은 인간의 것은 청춘의 황금시대다. 사랑의 풀이 대한
-				위하여서 것이다.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae temporibus tempora
+				architecto excepturi quaerat enim maiores ab nam esse incidunt ducimus nemo nihil, similique
+				minima eius officiis possimus libero reprehenderit.
 			</Typography>
 
 			<Link href={process.env.NEXT_PUBLIC_PROJECT_FOLDER_PATH as string}>
@@ -76,7 +78,8 @@ const MainTypo = () => {
 					variant="contained"
 					sx={{ width: { xs: '100%', sm: 'inherit' }, padding: '8px 24px', fontSize: '1.125rem' }}
 				>
-					프로젝트 보러가기
+					{/* 프로젝트 보러가기 */}
+					Check out my projects!
 				</Button>
 			</Link>
 		</>
