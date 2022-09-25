@@ -87,3 +87,19 @@
 /* .markdown-style {
 
 } */
+
+.mobile{
+  display: none;
+
+	@media (max-width: 760px) {
+		display: block;
+	}
+}
+
+.non-mobile{
+  display: none;
+
+	@media (min-width: 761px) {
+		display: block;
+	}
+}
