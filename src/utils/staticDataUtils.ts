@@ -42,6 +42,27 @@ export interface ParamProps {
 	};
 }
 
+export const getParsedMarkdown = ({ params: { sub, year, month, day, filename } }: ParamProps) => {
+	const markdownWithMetaData = fs
+		.readFileSync(
+			path.join(
+				process.env.NEXT_PUBLIC_ROOT_FOLDER as string,
+				sub,
+				year,
+				year + '-' + month + '-' + day + '-' + filename + '.md',
+			),
+		)
+		.toString();
+	const parsedMarkdown = matter(markdownWithMetaData);
+
+	return {
+		props: {
+			htmlstring: parsedMarkdown.content,
+			data: parsedMarkdown.data,
+		},
+	};
+};
+
 /* 단일 연도 파일 찾기 */
 export const readFile = (folderPath: string) => {
 	// _post/[sub]/[year]
