@@ -1,4 +1,4 @@
-import { Box, Button, Container, Grid, Typography } from '@mui/material';
+import { Button, Container, Grid, Typography } from '@mui/material';
 import Head from 'next/head';
 import Link from 'next/link';
 import lottieJson from 'public/rocket.json';
@@ -73,7 +73,7 @@ const MainTypo = () => {
 				minima eius officiis possimus libero reprehenderit.
 			</Typography>
 
-			<Link href={process.env.NEXT_PUBLIC_PROJECT_FOLDER_PATH as string}>
+			<Link href="/post/project">
 				<Button
 					variant="contained"
 					sx={{ width: { xs: '100%', sm: 'inherit' }, padding: '8px 24px', fontSize: '1.125rem' }}

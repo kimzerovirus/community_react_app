@@ -5,8 +5,8 @@ import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
 import markDownBlocks from 'src/components/markdownBlocks';
-import { StaticProps } from 'src/pages/post/project/[slug]';
 import { dateFormat } from 'src/utils/dateFormat';
+import { StaticProps } from 'src/utils/staticDataUtils';
 
 export default function MarkDownView({ htmlstring, data }: StaticProps) {
 	return (

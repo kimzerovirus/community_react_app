@@ -4,10 +4,10 @@ import Link from 'next/link';
 import { dateFormat } from 'src/utils/dateFormat';
 import { PostProps } from 'src/utils/staticDataUtils';
 
-export default function PostItem({ folderPath, frontmatter, slug }: PostProps) {
+export default function PostItem({ link, frontmatter, filename }: PostProps) {
 	return (
-		<PostIteWrapper>
-			<a href={`/${folderPath}/${slug}`}>
+		<PostItemWrapper>
+			<a href={link}>
 				<Typography
 					variant="h5"
 					// noWrap // 한 줄 ...
@@ -36,11 +36,11 @@ export default function PostItem({ folderPath, frontmatter, slug }: PostProps) {
 
 				{/* <Tag>#JAVA</Tag> */}
 			</a>
-		</PostIteWrapper>
+		</PostItemWrapper>
 	);
 }
 
-const PostIteWrapper = styled.li`
+const PostItemWrapper = styled.li`
 	a {
 		text-decoration: none;
 		color: inherit;
@@ -53,7 +53,7 @@ const PostIteWrapper = styled.li`
 		//모바일
 		margin: 2rem 0;
 
-		&:first-child {
+		&:first-of-type {
 			margin-top: 0;
 		}
 	}

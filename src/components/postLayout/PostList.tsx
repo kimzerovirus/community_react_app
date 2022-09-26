@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { Container } from '@mui/material';
 import { PostsProps } from 'src/utils/staticDataUtils';
 
+import Pagination from '../common/Pagination';
 import Post from './PostItem';
 
 export default function PostList({ posts }: PostsProps) {
@@ -22,13 +23,14 @@ export default function PostList({ posts }: PostsProps) {
 					// 	<p>{post.frontmatter.date}</p>
 					// </div>
 					<Post
-						folderPath={post.folderPath}
+						link={post.link}
 						frontmatter={post.frontmatter}
-						slug={post.slug}
+						filename={post.filename}
 						key={index}
 					/>
 				))}
 			</PostListWrapper>
+			<Pagination />
 		</Container>
 	);
 }
