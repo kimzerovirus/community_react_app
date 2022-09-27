@@ -1,7 +1,9 @@
 {
-  "name": "blog",
+  "name": "kimzerovirus.github.io",
   "version": "0.1.0",
+  "description": "kimzerovirus blog",
   "private": true,
+  "author": "kimzerovirus <kimzerovirus@gmail.com>",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

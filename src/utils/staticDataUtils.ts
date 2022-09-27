@@ -22,8 +22,8 @@ export interface StaticProps {
 	data: {
 		title: string;
 		date: string;
-		except: string;
-		cover_image: string;
+		except?: string;
+		cover_image?: string;
 	};
 }
 
