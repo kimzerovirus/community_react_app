@@ -14,7 +14,7 @@ export default function Footer() {
 					color: 'inherit',
 				}}
 			>
-				{year} © KIMZEROVIRUS.
+				© {year} KIMZEROVIRUS
 			</Typography>
 		</Container>
 	);
