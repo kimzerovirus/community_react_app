@@ -4,6 +4,7 @@ import path from 'path';
 
 export interface PostsProps {
 	posts: PostProps[];
+	paging?: PagingProps;
 }
 
 export interface PostProps {
@@ -15,6 +16,13 @@ export interface PostProps {
 		cover_image?: string;
 	};
 	filename: string;
+}
+
+export interface PagingProps {
+	isFirst: boolean;
+	isLast: boolean;
+	cPage: number;
+	totalPage: number;
 }
 
 export interface StaticProps {

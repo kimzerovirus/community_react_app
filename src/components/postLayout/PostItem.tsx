@@ -25,7 +25,8 @@ export default function PostItem({ link, frontmatter, filename }: PostProps) {
 					noWrap
 					component="p"
 					sx={{
-						color: '#afafaf',
+						// color: '#afafaf',
+						opacity: 0.4,
 					}}
 				>
 					{dateFormat(frontmatter.date)}

@@ -20,7 +20,8 @@ export default function MarkDownView({ htmlstring, data }: StaticProps) {
 					component="p"
 					mb={6}
 					sx={{
-						color: '#afafaf',
+						// color: '#afafaf',
+						opacity: 0.4,
 						textAlign: 'center',
 					}}
 				>

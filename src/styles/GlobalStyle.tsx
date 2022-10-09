@@ -10,6 +10,10 @@ const style = css`
 		width: 100% !important;
 		height: 100% !important;
 	}
+	a {
+		text-decoration: none;
+		color: inherit;
+	}
 `;
 
 const GlobalStyle = () => {

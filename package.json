@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "kimzerovirus blog",
   "private": true,
-  "author": "kimzerovirus <zerovirus96@gmail.com>",
+  "author": "kimzerovirus <kimzerovirus@gmail.com>",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,9 +11,7 @@
     "start": "next start",
     "deploy": "next build && next export && touch out/.nojekyll && gh-pages --add --dotfiles -d out",
     "deploy-sh": "sh deploy.sh",
-    "lint": "next lint",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "lint": "next lint"
   },
   "dependencies": {
     "@emotion/react": "^11.10.4",
@@ -31,19 +29,9 @@
     "react-spring": "^9.5.4",
     "react-syntax-highlighter": "^15.5.0",
     "rehype-raw": "^6.1.1",
-    "remark-gfm": "^3.0.1",
-    "theme-ui": "^0.15.1"
+    "remark-gfm": "^3.0.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.19.3",
-    "@storybook/addon-actions": "^6.5.12",
-    "@storybook/addon-essentials": "^6.5.12",
-    "@storybook/addon-interactions": "^6.5.12",
-    "@storybook/addon-links": "^6.5.12",
-    "@storybook/builder-webpack5": "^6.5.12",
-    "@storybook/manager-webpack5": "^6.5.12",
-    "@storybook/react": "^6.5.12",
-    "@storybook/testing-library": "^0.0.13",
     "@types/node": "18.0.0",
     "@types/react": "18.0.14",
     "@types/react-copy-to-clipboard": "^5.0.4",
@@ -51,19 +39,16 @@
     "@types/react-syntax-highlighter": "^15.5.5",
     "@typescript-eslint/eslint-plugin": "^5.29.0",
     "@typescript-eslint/parser": "^5.29.0",
-    "babel-loader": "^8.2.5",
     "eslint": "8.18.0",
     "eslint-config-next": "12.1.6",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
-    "eslint-plugin-storybook": "^0.6.4",
     "gh-pages": "^4.0.0",
     "next-seo": "^5.5.0",
     "next-sitemap": "^3.1.22",
     "prettier": "^2.7.1",
-    "react-docgen-typescript-loader": "^3.7.2",
     "sass": "^1.54.9",
     "typescript": "4.7.4"
   }
