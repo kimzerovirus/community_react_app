@@ -7,36 +7,38 @@ import { PostProps } from 'src/utils/staticDataUtils';
 export default function PostItem({ link, frontmatter, filename }: PostProps) {
 	return (
 		<PostItemWrapper>
-			<a href={link}>
-				<Typography
-					variant="h5"
-					// noWrap // 한 줄 ...
-					component="h2"
-					color="primary"
-					sx={{
-						fontWeight: 700,
-						wordBreak: 'keep-all',
-					}}
-				>
-					{frontmatter.title}
-				</Typography>
-				<Typography
-					variant="body2"
-					noWrap
-					component="p"
-					sx={{
-						// color: '#afafaf',
-						opacity: 0.4,
-					}}
-				>
-					{dateFormat(frontmatter.date)}
-				</Typography>
-				<TextWrapper>
-					<p>{frontmatter.except}</p>
-				</TextWrapper>
+			<Link href={link}>
+				<a>
+					<Typography
+						variant="h5"
+						// noWrap // 한 줄 ...
+						component="h2"
+						color="primary"
+						sx={{
+							fontWeight: 700,
+							wordBreak: 'keep-all',
+						}}
+					>
+						{frontmatter.title}
+					</Typography>
+					<Typography
+						variant="body2"
+						noWrap
+						component="p"
+						sx={{
+							// color: '#afafaf',
+							opacity: 0.4,
+						}}
+					>
+						{dateFormat(frontmatter.date)}
+					</Typography>
+					<TextWrapper>
+						<p>{frontmatter.except}</p>
+					</TextWrapper>
 
-				{/* <Tag>#JAVA</Tag> */}
-			</a>
+					{/* <Tag>#JAVA</Tag> */}
+				</a>
+			</Link>
 		</PostItemWrapper>
 	);
 }

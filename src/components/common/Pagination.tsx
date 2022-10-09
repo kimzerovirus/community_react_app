@@ -2,39 +2,59 @@ import styled from '@emotion/styled';
 import { FirstPage, LastPage, NavigateBefore, NavigateNext } from '@mui/icons-material';
 import { Box } from '@mui/material';
 import Link from 'next/link';
+import { FC, ReactNode } from 'react';
+import { PagingProps } from 'src/utils/staticDataUtils';
+
 // /post/project?page=1
 
-export default function Pagination() {
+interface PaginationProps {
+	paging: PagingProps;
+}
+
+const Pagination: FC<PaginationProps> = ({ paging }) => {
+	const path = window.location.pathname;
+	console.log(paging);
+
 	return (
 		<Box sx={{ display: 'flex', justifyContent: 'center' }}>
 			<Pageinate>
-				<Link href="/post/project" className="pre_end">
-					<a className="disable">
-						<FirstPage />
-					</a>
-				</Link>
-				<Link href="/post/project" className="pre_end">
-					<a>
-						<NavigateBefore />
-					</a>
-				</Link>
-				<Link href="/post/project">
-					<a className="active">5</a>
-				</Link>
-				<Link href="/" className="pre_end">
-					<a>
-						<NavigateNext />
-					</a>
-				</Link>
-				<Link href="/post/project" className="pre_end">
-					<a>
-						<LastPage />
-					</a>
-				</Link>
+				{paging.pageCounts ? (
+					<>
+						<Link href={path}>
+							<a className={paging.isFirst ? 'disable' : ''}>
+								<FirstPage />
+							</a>
+						</Link>
+						<Link href={path}>
+							<a className={paging.isFirst ? 'disable' : ''}>
+								<NavigateBefore />
+							</a>
+						</Link>
+
+						{paging.pageCounts.map(pageNum => (
+							<Link href={{ pathname: path, query: { page: pageNum } }} key={pageNum}>
+								<a className={paging.currentPage === pageNum ? 'active' : ''}>{pageNum}</a>
+							</Link>
+						))}
+
+						<Link href={path}>
+							<a className={paging.isLast ? 'disable' : ''}>
+								<NavigateNext />
+							</a>
+						</Link>
+						<Link href={path}>
+							<a className={paging.isLast ? 'disable' : ''}>
+								<LastPage />
+							</a>
+						</Link>
+					</>
+				) : (
+					<></>
+				)}
 			</Pageinate>
 		</Box>
 	);
-}
+};
 
 const Pageinate = styled.div`
 	margin: 20px 0 0;
@@ -81,3 +101,5 @@ const Pageinate = styled.div`
 		}
 	}
 `;
+
+export default Pagination;

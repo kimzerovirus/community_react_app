@@ -4,7 +4,7 @@ import path from 'path';
 
 export interface PostsProps {
 	posts: PostProps[];
-	paging?: PagingProps;
+	paging: PagingProps;
 }
 
 export interface PostProps {
@@ -21,8 +21,9 @@ export interface PostProps {
 export interface PagingProps {
 	isFirst: boolean;
 	isLast: boolean;
-	cPage: number;
-	totalPage: number;
+	currentPage: number;
+	totalPages: number;
+	pageCounts: number[];
 }
 
 export interface StaticProps {
