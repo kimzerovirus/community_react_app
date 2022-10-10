@@ -2,12 +2,17 @@ import styled from '@emotion/styled';
 import { Container } from '@mui/material';
 import { FC, ReactNode } from 'react';
 import DefaultLayout from 'src/components/common/DefaultLayout';
-import { PostsProps } from 'src/utils/staticDataUtils';
+import { PagingProps, PostProps } from 'src/utils/staticDataUtils';
 
 import Pagination from '../common/Pagination';
 import Post from './PostItem';
 
-const PostList: FC<PostsProps> = ({ posts, paging }) => {
+interface PostListProps {
+	posts: PostProps[];
+	paging: PagingProps;
+}
+
+const PostList: FC<PostListProps> = ({ posts, paging }) => {
 	return (
 		<DefaultLayout maxWidth="md" isBorder>
 			<PostListWrapper>

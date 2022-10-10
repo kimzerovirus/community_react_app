@@ -1,4 +1,4 @@
-import MarkDownView from 'src/components/postLayout/MarkDownView';
+import PostView from 'src/components/postLayout/PostView';
 import {
 	getParsedMarkdown,
 	makePostPath,
@@ -7,7 +7,7 @@ import {
 } from 'src/utils/staticDataUtils';
 
 export default function ProjectPostPage({ htmlstring, data }: StaticProps) {
-	return <MarkDownView htmlstring={htmlstring} data={data} />;
+	return <PostView htmlstring={htmlstring} data={data} />;
 }
 
 export async function getStaticPaths() {

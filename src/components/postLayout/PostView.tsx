@@ -10,7 +10,7 @@ import { dateFormat } from 'src/utils/dateFormat';
 import { StaticProps } from 'src/utils/staticDataUtils';
 import { usePreventCopy } from 'src/utils/usePreventCopy';
 
-export default function MarkDownView({ htmlstring, data }: StaticProps) {
+export default function PostView({ htmlstring, data }: StaticProps) {
 	usePreventCopy();
 
 	return (

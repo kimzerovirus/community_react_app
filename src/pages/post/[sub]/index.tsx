@@ -6,11 +6,14 @@ import {
 	PagingProps,
 	ParamProps,
 	PostProps,
-	PostsProps,
 	readAllFiles,
 } from 'src/utils/staticDataUtils';
 
-export default function PostListPage({ posts }: PostsProps) {
+interface PostListPageProps {
+	posts: PostProps[];
+}
+
+export default function PostListPage({ posts }: PostListPageProps) {
 	const PER_PAGE = 8;
 
 	const router = useRouter();

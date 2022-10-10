@@ -2,10 +2,10 @@ import fs from 'fs';
 import matter from 'gray-matter';
 import path from 'path';
 
-export interface PostsProps {
-	posts: PostProps[];
-	paging: PagingProps;
-}
+// export interface PostsProps {
+// 	posts: PostProps[];
+// 	paging: PagingProps;
+// }
 
 export interface PostProps {
 	link: string;
