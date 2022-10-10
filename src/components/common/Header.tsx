@@ -10,6 +10,11 @@ import { animated, useTransition } from 'react-spring';
 
 import { ColorMode, ThemeContext, useTheme, useToggleTheme } from '../CustomThemeProvider';
 import SideBar from './SideBar';
+
+interface HeaderProps {
+	isBorder?: boolean;
+}
+
 const menuList = [
 	{ name: 'home', link: '/' },
 	// { name: '일상', link: '/' },
@@ -87,9 +92,12 @@ export const ButtonGroup = () => {
 };
 
 /* TODO 모바일 사이즈에서는 돋보기가 없어지고 햄버거 메뉴로 통합 */
-export default function Header() {
+export default function Header({ isBorder }: HeaderProps) {
 	return (
-		<Container maxWidth="xl">
+		<Container
+			maxWidth="xl"
+			sx={isBorder ? { borderBottom: '1px solid rgba(128,128,128,0.36)' } : { border: 'none' }}
+		>
 			<Toolbar disableGutters variant="dense" sx={{ maxHeight: '80px' }}>
 				<h1>
 					<Typography

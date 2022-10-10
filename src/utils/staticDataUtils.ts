@@ -121,7 +121,7 @@ export const readAllFiles = (sub: string) => {
 				const { data: frontmatter, content } = matter(markdownWithMeta);
 
 				const reg = /[`~@#$%^&*()_|+\-='",<>\{\}\[\]\\\/]/gim;
-				frontmatter.except = content.replace(reg, '').substring(0, 300);
+				frontmatter.except = content.replace(reg, '').substring(0, 360);
 
 				return {
 					link: path

@@ -1,12 +1,13 @@
-import { Button, Container, Grid, Typography } from '@mui/material';
+import { Button, Grid, Typography } from '@mui/material';
 import Head from 'next/head';
 import Link from 'next/link';
 import lottieJson from 'public/rocket.json';
 import Lottie from 'react-lottie-player';
+import DefaultLayout from 'src/components/common/DefaultLayout';
 
 export default function Home() {
 	return (
-		<Container maxWidth="xl">
+		<DefaultLayout maxWidth="xl">
 			<Head>
 				<title>kimzerovirus.log</title>
 			</Head>
@@ -37,7 +38,7 @@ export default function Home() {
 					<MainImage />
 				</Grid>
 			</Grid>
-		</Container>
+		</DefaultLayout>
 	);
 }
 

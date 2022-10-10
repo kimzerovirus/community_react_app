@@ -48,10 +48,11 @@ const PostItemWrapper = styled.li`
 		text-decoration: none;
 		color: inherit;
 	}
+	/* border-bottom: 1px solid rgba(128, 128, 128, 0.36); */
+	min-height: 140px;
 	margin: 3rem 0;
 	text-decoration: none;
 	display: block;
-	/* border-bottom: 1px solid #afafaf; */
 	@media (max-width: 760px) {
 		//모바일
 		margin: 2rem 0;

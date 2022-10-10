@@ -11,25 +11,41 @@ interface PaginationProps {
 	paging: PagingProps;
 }
 
+interface LinkIconWrapperProps {
+	children: ReactNode;
+	path: {
+		pathname: string;
+		query: { page: number };
+	};
+	isDisable: boolean;
+}
+
+const LinkIconWrapper: FC<LinkIconWrapperProps> = ({ children, path, isDisable }) => (
+	<Link href={path}>
+		<a className={isDisable ? 'disable' : ''}>{children}</a>
+	</Link>
+);
+
 const Pagination: FC<PaginationProps> = ({ paging }) => {
 	const path = window.location.pathname;
-	console.log(paging);
 
 	return (
 		<Box sx={{ display: 'flex', justifyContent: 'center' }}>
 			<Pageinate>
 				{paging.pageCounts ? (
 					<>
-						<Link href={path}>
-							<a className={paging.isFirst ? 'disable' : ''}>
-								<FirstPage />
-							</a>
-						</Link>
-						<Link href={path}>
-							<a className={paging.isFirst ? 'disable' : ''}>
-								<NavigateBefore />
-							</a>
-						</Link>
+						<LinkIconWrapper
+							path={{ pathname: path, query: { page: 1 } }}
+							isDisable={paging.isFirst}
+						>
+							<FirstPage />
+						</LinkIconWrapper>
+						<LinkIconWrapper
+							path={{ pathname: path, query: { page: paging.pageCounts[0] - 1 } }}
+							isDisable={paging.isFirst}
+						>
+							<NavigateBefore />
+						</LinkIconWrapper>
 
 						{paging.pageCounts.map(pageNum => (
 							<Link href={{ pathname: path, query: { page: pageNum } }} key={pageNum}>
@@ -37,16 +53,18 @@ const Pagination: FC<PaginationProps> = ({ paging }) => {
 							</Link>
 						))}
 
-						<Link href={path}>
-							<a className={paging.isLast ? 'disable' : ''}>
-								<NavigateNext />
-							</a>
-						</Link>
-						<Link href={path}>
-							<a className={paging.isLast ? 'disable' : ''}>
-								<LastPage />
-							</a>
-						</Link>
+						<LinkIconWrapper
+							path={{ pathname: path, query: { page: paging.pageCounts[4] + 1 } }}
+							isDisable={paging.isLast}
+						>
+							<NavigateNext />
+						</LinkIconWrapper>
+						<LinkIconWrapper
+							path={{ pathname: path, query: { page: paging.totalPages } }}
+							isDisable={paging.isLast}
+						>
+							<LastPage />
+						</LinkIconWrapper>
 					</>
 				) : (
 					<></>
@@ -80,11 +98,11 @@ const Pageinate = styled.div`
 		border: 0;
 
 		&.active {
-			background-color: rgba(255, 255, 255, 0.16);
+			background-color: rgba(128, 128, 128, 0.24);
 		}
 
 		&:hover {
-			background-color: rgba(255, 255, 255, 0.1);
+			background-color: rgba(128, 128, 128, 0.1);
 		}
 
 		&.disable {

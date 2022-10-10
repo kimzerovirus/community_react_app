@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { Container } from '@mui/material';
 import { FC, ReactNode } from 'react';
+import DefaultLayout from 'src/components/common/DefaultLayout';
 import { PostsProps } from 'src/utils/staticDataUtils';
 
 import Pagination from '../common/Pagination';
@@ -8,7 +9,7 @@ import Post from './PostItem';
 
 const PostList: FC<PostsProps> = ({ posts, paging }) => {
 	return (
-		<Container maxWidth="md">
+		<DefaultLayout maxWidth="md" isBorder>
 			<PostListWrapper>
 				{posts.map((post, index) => (
 					<Post
@@ -20,7 +21,7 @@ const PostList: FC<PostsProps> = ({ posts, paging }) => {
 				))}
 			</PostListWrapper>
 			<Pagination paging={paging} />
-		</Container>
+		</DefaultLayout>
 	);
 };
 

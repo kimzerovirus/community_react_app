@@ -1,14 +1,16 @@
 import ClearIcon from '@mui/icons-material/Clear';
 import SearchIcon from '@mui/icons-material/Search';
-import { Box, Container, InputAdornment, TextField } from '@mui/material';
+import { Box, InputAdornment, TextField } from '@mui/material';
 import React from 'react';
+import DefaultLayout from 'src/components/common/DefaultLayout';
+
 function Search() {
 	const handleSubmit = () => {
 		console.log('test');
 	};
 
 	return (
-		<Container component="main" maxWidth="md">
+		<DefaultLayout maxWidth="md">
 			<Box component="form" onSubmit={handleSubmit} noValidate mt={6}>
 				<TextField
 					margin="normal"
@@ -23,7 +25,7 @@ function Search() {
 					}}
 				/>
 			</Box>
-		</Container>
+		</DefaultLayout>
 	);
 }
 

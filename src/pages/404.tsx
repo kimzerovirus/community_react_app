@@ -1,13 +1,14 @@
 // import LaunchSharpIcon from '@mui/icons-material/LaunchSharp';
 // import OpenInNewSharpIcon from '@mui/icons-material/OpenInNewSharp';
 // import HomeSharpIcon from '@mui/icons-material/HomeSharp';
-import { Container, Grid, Link, Typography } from '@mui/material';
+import { Grid, Link, Typography } from '@mui/material';
 import lottieJson from 'public/cat.json';
 import Lottie from 'react-lottie-player';
+import DefaultLayout from 'src/components/common/DefaultLayout';
 
 export default function PageNotFound() {
 	return (
-		<Container component="main" maxWidth="xs" style={{ marginTop: '10%' }}>
+		<DefaultLayout maxWidth="xs" style={{ marginTop: '10%' }}>
 			<Lottie loop animationData={lottieJson} play style={{ width: `100%`, height: `100%` }} />
 
 			<Grid container justifyContent="center" mt={2}>
@@ -21,6 +22,6 @@ export default function PageNotFound() {
 					{/* <HomeSharpIcon sx={{ fontSize: '0.875rem' }} /> */}
 				</Link>
 			</Grid>
-		</Container>
+		</DefaultLayout>
 	);
 }
