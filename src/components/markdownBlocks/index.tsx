@@ -1,26 +1,14 @@
 import BlockquoteBlock from 'src/components/markdownBlocks/BlockquoteBlock';
 import CodeBlock from 'src/components/markdownBlocks/CodeBlock';
+import EmBlock from 'src/components/markdownBlocks/EmBlock';
+import ImgBlock from 'src/components/markdownBlocks/ImgBlock';
 import TableBlock from 'src/components/markdownBlocks/TableBlock';
 
 const markDownBlocks = {
 	code: CodeBlock,
-	blockquote: BlockquoteBlock, // >
-	// img({ node, ...props }) {
-	// 	return (
-	// 		<img
-	// 			style={{ maxWidth: '60vw' }}
-	// 			src={props.src.replace('../../../../public/', '/')}
-	// 			alt="MarkdownRenderer__Image"
-	// 		/>
-	// 	);
-	// },
-	em({ node, children, ...props }: any) {
-		return (
-			<span style={{ fontStyle: 'italic' }} {...props}>
-				{children}
-			</span>
-		);
-	},
+	blockquote: BlockquoteBlock,
+	img: ImgBlock,
+	em: EmBlock,
 	table: TableBlock,
 };
 

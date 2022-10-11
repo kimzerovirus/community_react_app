@@ -6,42 +6,48 @@ import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
 import DefaultLayout from 'src/components/common/DefaultLayout';
 import markDownBlocks from 'src/components/markdownBlocks';
+import Toc from 'src/components/markdownBlocks/Toc';
+import { usePreventCopy } from 'src/utils/customHooks';
 import { dateFormat } from 'src/utils/dateFormat';
 import { StaticProps } from 'src/utils/staticDataUtils';
-import { usePreventCopy } from 'src/utils/usePreventCopy';
 
 export default function PostView({ htmlstring, data }: StaticProps) {
 	usePreventCopy();
 
 	return (
-		<DefaultLayout maxWidth="md" isBorder>
-			<TitleTypo>{data.title}</TitleTypo>
-			<Typography
-				variant="body2"
-				noWrap
-				component="p"
-				mb={6}
-				sx={{
-					// color: '#afafaf',
-					opacity: 0.4,
-					textAlign: 'center',
-				}}
-			>
-				{dateFormat(data.date)}
-			</Typography>
+		<DefaultLayout maxWidth="xl" isBorder style={{ position: 'relative' }}>
+			{/* Sticky Table of Contents */}
+			<Toc htmlstring={htmlstring} />
 
-			<ReactMarkdown
-				className="markdown-style"
-				remarkPlugins={[remarkGfm]} // TODO link, table, checklist - styling
-				rehypePlugins={[[rehypeRaw, { passThrough: ['element'] }]]}
-				components={markDownBlocks}
-			>
-				{htmlstring
-					.replace(/\n\s\n\s/gi, '\n\n&nbsp;\n\n')
-					.replace(/\*\*/gi, '@$_%!^')
-					.replace(/@\$_%!\^/gi, '**')
-					.replace(/<\/?u>/gi, '*')}
-			</ReactMarkdown>
+			<Container maxWidth="md">
+				<TitleTypo>{data.title}</TitleTypo>
+				<Typography
+					variant="body2"
+					noWrap
+					component="p"
+					mb={6}
+					sx={{
+						// color: '#afafaf',
+						opacity: 0.4,
+						textAlign: 'center',
+					}}
+				>
+					{dateFormat(data.date)}
+				</Typography>
+
+				<ReactMarkdown
+					className="markdown-style"
+					remarkPlugins={[remarkGfm]} // TODO link, table, checklist - styling
+					rehypePlugins={[[rehypeRaw, { passThrough: ['element'] }]]}
+					components={markDownBlocks}
+				>
+					{htmlstring
+						.replace(/\n\s\n\s/gi, '\n\n&nbsp;\n\n')
+						.replace(/\*\*/gi, '@$_%!^')
+						.replace(/@\$_%!\^/gi, '**')
+						.replace(/<\/?u>/gi, '*')}
+				</ReactMarkdown>
+			</Container>
 		</DefaultLayout>
 	);
 }

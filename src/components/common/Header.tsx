@@ -94,63 +94,64 @@ export const ButtonGroup = () => {
 /* TODO 모바일 사이즈에서는 돋보기가 없어지고 햄버거 메뉴로 통합 */
 export default function Header({ isBorder }: HeaderProps) {
 	return (
-		<Container
-			maxWidth="xl"
-			sx={isBorder ? { borderBottom: '1px solid rgba(128,128,128,0.36)' } : { border: 'none' }}
+		<div
+			style={isBorder ? { borderBottom: '1px solid rgba(128,128,128,0.36)' } : { border: 'none' }}
 		>
-			<Toolbar disableGutters variant="dense" sx={{ maxHeight: '80px' }}>
-				<h1>
-					<Typography
-						variant="h6"
-						noWrap
-						component="a"
-						href="https://github.com/kimzerovirus"
-						sx={{
-							mr: 2,
-							fontWeight: 700,
-							color: 'inherit',
-							textDecoration: 'none',
-							lineHeight: '80px',
-						}}
+			<Container maxWidth="xl">
+				<Toolbar disableGutters variant="dense" sx={{ maxHeight: '80px' }}>
+					<h1>
+						<Typography
+							variant="h6"
+							noWrap
+							component="a"
+							href="https://github.com/kimzerovirus"
+							sx={{
+								mr: 2,
+								fontWeight: 700,
+								color: 'inherit',
+								textDecoration: 'none',
+								lineHeight: '80px',
+							}}
+						>
+							KIMZEROVIRUS
+						</Typography>
+					</h1>
+					<Grid
+						container
+						// justifyContent="flex-end"
+						sx={{ display: { xs: 'none', sm: 'flex' } }}
 					>
-						KIMZEROVIRUS
-					</Typography>
-				</h1>
-				<Grid
-					container
-					// justifyContent="flex-end"
-					sx={{ display: { xs: 'none', sm: 'flex' } }}
-				>
-					{menuList.map(({ name, link }) => (
-						<Grid item key={name}>
-							<Button
-								component="a"
-								href={link}
-								sx={{
-									color: 'inherit',
-									fontSize: '1rem',
-									textDecoration: 'none',
-									minWidth: '0',
-								}}
-							>
-								{name}
-							</Button>
-						</Grid>
-					))}
-				</Grid>
+						{menuList.map(({ name, link }) => (
+							<Grid item key={name}>
+								<Button
+									component="a"
+									href={link}
+									sx={{
+										color: 'inherit',
+										fontSize: '1rem',
+										textDecoration: 'none',
+										minWidth: '0',
+									}}
+								>
+									{name}
+								</Button>
+							</Grid>
+						))}
+					</Grid>
 
-				<Box sx={{ display: { xs: 'none', sm: 'flex' } }}>
-					<Group>
-						<ButtonGroup />
-					</Group>
-				</Box>
-				<Box
-					sx={{ display: { xs: 'flex', sm: 'none' }, width: '100%', justifyContent: 'flex-end' }}
-				>
-					<SideBar menuList={menuList} />
-				</Box>
-			</Toolbar>
-		</Container>
+					<Box sx={{ display: { xs: 'none', sm: 'flex' } }}>
+						<Group>
+							<ButtonGroup />
+						</Group>
+					</Box>
+					<Box
+						sx={{ display: { xs: 'flex', sm: 'none' }, width: '100%', justifyContent: 'flex-end' }}
+					>
+						<SideBar menuList={menuList} />
+					</Box>
+				</Toolbar>
+			</Container>
+		</div>
 	);
 }
 
