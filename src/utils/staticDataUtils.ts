@@ -34,6 +34,12 @@ export interface StaticProps {
 		except?: string;
 		cover_image?: string;
 	};
+	indexes: IndexProps[];
+}
+
+export interface IndexProps {
+	depth: number;
+	title: string;
 }
 
 export interface PathProps {
@@ -51,7 +57,10 @@ export interface ParamProps {
 	};
 }
 
+// 포스팅 데이터 가져오기
 export const getParsedMarkdown = ({ params: { sub, year, month, day, filename } }: ParamProps) => {
+	const INDENT_SIZE = 12;
+
 	const markdownWithMetaData = fs
 		.readFileSync(
 			path.join(
@@ -64,10 +73,23 @@ export const getParsedMarkdown = ({ params: { sub, year, month, day, filename } 
 		.toString();
 	const parsedMarkdown = matter(markdownWithMetaData);
 
+	const titles = parsedMarkdown.content.split(`\n`).filter(title => title.includes('# '));
+	const indexes = titles
+		.filter(str => str[0] === '#')
+		.map(title => {
+			const depth =
+				(title.match(/#/g)?.length as number) > 0
+					? ((title.match(/#/g)?.length as number) - 1) * INDENT_SIZE
+					: INDENT_SIZE;
+
+			return { title: title.split('# ')[1].replace(/`/g, '').trim(), depth };
+		});
+
 	return {
 		props: {
 			htmlstring: parsedMarkdown.content,
 			data: parsedMarkdown.data,
+			indexes,
 		},
 	};
 };

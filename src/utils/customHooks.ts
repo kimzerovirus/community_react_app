@@ -7,6 +7,7 @@ import {
 	useRef,
 	useState,
 } from 'react';
+import { IndexProps } from 'src/utils/staticDataUtils';
 
 type ReturnTypes<T> = [T, (e: ChangeEvent<HTMLInputElement>) => void, Dispatch<SetStateAction<T>>];
 
@@ -42,7 +43,7 @@ export const useScrollSpy = () => {
 // export const useIntersectionObserver: VF<ObserverProps> = ({ setActiveId, htmlstring }) => {
 export const useIntersectionObserver = (
 	setActiveId: Dispatch<SetStateAction<string>>,
-	htmlstring: string,
+	htmlstring: IndexProps[],
 ) => {
 	const headingElementsRef = useRef<any>({});
 
@@ -64,16 +65,18 @@ export const useIntersectionObserver = (
 				if (headingElement.isIntersecting) visibleHeadings.push(headingElement);
 			});
 
-			const getIndexFromId = (id: string) =>
-				headingElements.findIndex(heading => heading.id === id);
+			// 화면의 아이디 중 최상단 아이디 찾기
+			// const getIndexFromId = (id: string) =>
+			// 	headingElements.findIndex(heading => heading.id === id);
 
 			if (visibleHeadings.length === 1) {
+				// 화면에 보이는 아이디가 한개라면 바로 아이디 저장
 				setActiveId(visibleHeadings[0].target.id);
 			} else if (visibleHeadings.length > 1) {
+				// 화면에 아이디가 여러개 보인다면 최상단 아이디를 찾은 후 아이디 저장
 				const sortedVisibleHeadings = visibleHeadings.sort(
-					(a, b) => getIndexFromId(a.target.id) - getIndexFromId(b.target.id),
+					(a, b) => Number(a.target.id) - Number(b.target.id), // 오름차순 정렬, id 값을 인덱스로 정했으므로 바로 계산함
 				);
-				console.log(visibleHeadings[0].target.id);
 				setActiveId(sortedVisibleHeadings[0].target.id);
 			}
 		};

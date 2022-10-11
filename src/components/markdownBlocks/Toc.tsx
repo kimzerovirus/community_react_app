@@ -1,37 +1,24 @@
 import styled from '@emotion/styled';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { useIntersectionObserver } from 'src/utils/customHooks';
+import { IndexProps } from 'src/utils/staticDataUtils';
 
 interface TocProps {
-	htmlstring: string;
+	indexes: IndexProps[];
 }
 
 interface TocLiProps {
 	depth: number;
 }
 
-const Toc: FC<TocProps> = ({ htmlstring }) => {
-	const INDENT_SIZE = 12;
-
+const Toc: FC<TocProps> = ({ indexes }) => {
 	const [activeId, setActiveId] = useState('');
 
-	useIntersectionObserver(setActiveId, htmlstring);
-
-	const titles = htmlstring.split(`\n`).filter(title => title.includes('# '));
-	const indexes = titles
-		.filter(str => str[0] === '#')
-		.map(title => {
-			const depth =
-				(title.match(/#/g)?.length as number) > 0
-					? ((title.match(/#/g)?.length as number) - 1) * INDENT_SIZE
-					: INDENT_SIZE;
-
-			return { title: title.split('# ')[1].replace(/`/g, '').trim(), depth };
-		});
+	useIntersectionObserver(setActiveId, indexes);
 
 	return indexes ? (
 		<TocUl>
-			{indexes.map((index, id) => (
+			{indexes.map((index: IndexProps, id: number) => (
 				<TocLi key={id} depth={index.depth} className={activeId === String(id) ? 'active' : ''}>
 					<a href={`#${id}`}>{index.title}</a>
 				</TocLi>

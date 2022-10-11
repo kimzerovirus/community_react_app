@@ -11,13 +11,13 @@ import { usePreventCopy } from 'src/utils/customHooks';
 import { dateFormat } from 'src/utils/dateFormat';
 import { StaticProps } from 'src/utils/staticDataUtils';
 
-export default function PostView({ htmlstring, data }: StaticProps) {
+export default function PostView({ htmlstring, data, indexes }: StaticProps) {
 	usePreventCopy();
 
 	return (
 		<DefaultLayout maxWidth="xl" isBorder style={{ position: 'relative' }}>
 			{/* Sticky Table of Contents */}
-			<Toc htmlstring={htmlstring} />
+			<Toc indexes={indexes} />
 
 			<Container maxWidth="md">
 				<TitleTypo>{data.title}</TitleTypo>
