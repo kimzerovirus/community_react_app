@@ -106,6 +106,14 @@ export const usePaging = (
 	const router = useRouter();
 
 	Router.events.on('routeChangeComplete', () => {
+		callback();
+	});
+
+	useEffect(() => {
+		callback();
+	}, [router.isReady]);
+
+	function callback() {
 		if (router.isReady) {
 			const { page } = router.query;
 			const currentPage =
@@ -140,5 +148,5 @@ export const usePaging = (
 				pageCounts,
 			});
 		}
-	});
+	}
 };

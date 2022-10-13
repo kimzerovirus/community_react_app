@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PostList from 'src/components/postLayout/PostList';
 import { usePaging } from 'src/utils/customHooks';
 import {
