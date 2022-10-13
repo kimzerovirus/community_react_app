@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import {
 	ChangeEvent,
 	Dispatch,
@@ -105,7 +105,7 @@ export const usePaging = (
 ) => {
 	const router = useRouter();
 
-	useEffect(() => {
+	Router.events.on('routeChangeComplete', () => {
 		if (router.isReady) {
 			const { page } = router.query;
 			const currentPage =
@@ -140,5 +140,5 @@ export const usePaging = (
 				pageCounts,
 			});
 		}
-	}, [router.isReady]);
+	});
 };
