@@ -61,10 +61,6 @@ export default function PostListByYearPage({ posts }: PostListPageProps) {
 	return <PostList posts={slicedPosts} paging={paging} />;
 }
 
-export async function getStaticPaths() {
-	return makeListPath();
-}
-
 export async function getStaticProps({ params: { sub } }: ParamProps) {
 	return readAllFiles((process.env.NEXT_PUBLIC_ROOT_FOLDER + '/' + sub) as string);
 }
