@@ -13,6 +13,7 @@ export interface PostProps {
 		title: string;
 		date: string;
 		except?: string;
+		tags?: string[];
 		cover_image?: string;
 	};
 	filename: string;

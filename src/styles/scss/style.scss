@@ -30,14 +30,14 @@
       position: fixed;
       bottom: 0;
       right: 0;
-      z-index: 1000;
+      z-index: 10;
     }
 
     .copy-icon {
       position: absolute;
       top: 1rem;
       right: 1rem;
-      z-index: 1000;
+      z-index: 10;
       display: none;
     }
 
@@ -69,7 +69,7 @@
 
     &:after {
       content: "";
-      z-index: 9999;
+      z-index: 10;
       position: absolute;
       top: 0;
       left: 0;
