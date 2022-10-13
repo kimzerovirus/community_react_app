@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import {
 	ChangeEvent,
 	Dispatch,
@@ -7,7 +8,7 @@ import {
 	useRef,
 	useState,
 } from 'react';
-import { IndexProps } from 'src/utils/staticDataUtils';
+import { IndexProps, PagingProps, PostProps } from 'src/utils/staticDataUtils';
 
 type ReturnTypes<T> = [T, (e: ChangeEvent<HTMLInputElement>) => void, Dispatch<SetStateAction<T>>];
 
@@ -94,4 +95,50 @@ export const useIntersectionObserver = (
 
 		return () => observer.disconnect();
 	}, [htmlstring]);
+};
+
+export const usePaging = (
+	setSlicedPosts: Dispatch<SetStateAction<PostProps[]>>,
+	setPaging: Dispatch<SetStateAction<PagingProps>>,
+	posts: PostProps[],
+	PER_PAGE = 10,
+) => {
+	const router = useRouter();
+
+	useEffect(() => {
+		if (router.isReady) {
+			const { page } = router.query;
+			const currentPage =
+				page === undefined ? 1 : Number(page) > posts.length ? posts.length : Number(page);
+			const start = (currentPage - 1) * PER_PAGE;
+			const end = currentPage * PER_PAGE;
+			const totalPages =
+				posts.length % PER_PAGE === 0
+					? posts.length / PER_PAGE
+					: Math.floor(posts.length / PER_PAGE) + 1;
+
+			const pageCounts: number[] = [];
+			let startNum = 1,
+				endNum = 1;
+
+			if (totalPages <= 5) {
+				startNum = 1;
+				endNum = totalPages;
+			} else {
+				startNum = currentPage + 1 - (currentPage % 5);
+				endNum = startNum + 4 > totalPages ? totalPages : startNum + 4;
+			}
+
+			for (let i = startNum; i <= endNum; i++) pageCounts.push(i);
+
+			setSlicedPosts(posts.slice(start, end));
+			setPaging({
+				isFirst: currentPage === 1 ? true : false,
+				isLast: currentPage === totalPages ? true : false,
+				currentPage,
+				totalPages,
+				pageCounts,
+			});
+		}
+	}, [router.isReady]);
 };
