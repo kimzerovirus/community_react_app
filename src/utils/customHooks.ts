@@ -106,47 +106,50 @@ export const usePaging = (
 	const router = useRouter();
 
 	Router.events.on('routeChangeComplete', () => {
+		// router.isReady 는 쿼리스트링 변경이 완료되기 전에 실행되서 값의 변경을 감지하지 못한다.
+		// 반면 router 이벤트를 사용하면 완전히 변경된 후에 작동이 가능한듯 하다.
 		callback();
 	});
 
 	useEffect(() => {
+		// 라우터 이벤트는 쿼리스트링이 없는 기본 url 로 접속시 작동하지 않으므로
+		// 기본 url 접속시 1페이지로 보낸다.
 		callback();
-	}, [router.isReady]);
+	}, []);
 
 	function callback() {
-		if (router.isReady) {
-			const { page } = router.query;
-			const currentPage =
-				page === undefined ? 1 : Number(page) > posts.length ? posts.length : Number(page);
-			const start = (currentPage - 1) * PER_PAGE;
-			const end = currentPage * PER_PAGE;
-			const totalPages =
-				posts.length % PER_PAGE === 0
-					? posts.length / PER_PAGE
-					: Math.floor(posts.length / PER_PAGE) + 1;
+		const { page } = router.query;
+		const currentPage =
+			page === undefined ? 1 : Number(page) > posts.length ? posts.length : Number(page);
+		console.log(currentPage);
+		const start = (currentPage - 1) * PER_PAGE;
+		const end = currentPage * PER_PAGE;
+		const totalPages =
+			posts.length % PER_PAGE === 0
+				? posts.length / PER_PAGE
+				: Math.floor(posts.length / PER_PAGE) + 1;
 
-			const pageCounts: number[] = [];
-			let startNum = 1,
-				endNum = 1;
+		const pageCounts: number[] = [];
+		let startNum = 1,
+			endNum = 1;
 
-			if (totalPages <= 5) {
-				startNum = 1;
-				endNum = totalPages;
-			} else {
-				startNum = currentPage + 1 - (currentPage % 5);
-				endNum = startNum + 4 > totalPages ? totalPages : startNum + 4;
-			}
-
-			for (let i = startNum; i <= endNum; i++) pageCounts.push(i);
-
-			setSlicedPosts(posts.slice(start, end));
-			setPaging({
-				isFirst: currentPage === 1 ? true : false,
-				isLast: currentPage === totalPages ? true : false,
-				currentPage,
-				totalPages,
-				pageCounts,
-			});
+		if (totalPages <= 5) {
+			startNum = 1;
+			endNum = totalPages;
+		} else {
+			startNum = currentPage + 1 - (currentPage % 5);
+			endNum = startNum + 4 > totalPages ? totalPages : startNum + 4;
 		}
+
+		for (let i = startNum; i <= endNum; i++) pageCounts.push(i);
+
+		setSlicedPosts(posts.slice(start, end));
+		setPaging({
+			isFirst: currentPage === 1 ? true : false,
+			isLast: currentPage === totalPages ? true : false,
+			currentPage,
+			totalPages,
+			pageCounts,
+		});
 	}
 };
