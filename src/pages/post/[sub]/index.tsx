@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import DefaultLayout from 'src/components/common/DefaultLayout';
 import PostList from 'src/components/postLayout/PostList';
 import { usePaging } from 'src/utils/customHooks';
 import {
@@ -21,7 +22,11 @@ export default function PostListPage({ posts }: PostListPageProps) {
 
 	usePaging(setSlicedPosts, setPaging, posts, PER_PAGE);
 
-	return <PostList posts={slicedPosts} paging={paging} />;
+	return (
+		<DefaultLayout maxWidth="md" isBorder>
+			<PostList posts={slicedPosts} paging={paging} />
+		</DefaultLayout>
+	);
 }
 
 export async function getStaticPaths() {

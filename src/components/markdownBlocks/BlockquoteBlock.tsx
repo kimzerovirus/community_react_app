@@ -1,4 +1,4 @@
-import { useTheme } from '../CustomThemeProvider';
+import { useTheme } from 'src/styles/theme/CustomThemeProvider';
 
 export default function BlockquoteBlock({ node, children, ...props }: any) {
 	const style = useTheme();

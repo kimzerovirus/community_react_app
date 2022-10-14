@@ -7,8 +7,13 @@ import { Button, Container, Grid, IconButton, Toolbar, Typography } from '@mui/m
 import { Box } from '@mui/system';
 import { useContext } from 'react';
 import { animated, useTransition } from 'react-spring';
+import {
+	ColorMode,
+	ThemeContext,
+	useTheme,
+	useToggleTheme,
+} from 'src/styles/theme/CustomThemeProvider';
 
-import { ColorMode, ThemeContext, useTheme, useToggleTheme } from '../CustomThemeProvider';
 import SideBar from './SideBar';
 
 interface HeaderProps {
@@ -84,7 +89,7 @@ export const ButtonGroup = () => {
 	return (
 		<>
 			<ThemeToggleButton />
-			<IconButton href="/search" color="inherit">
+			<IconButton href="/post/search" color="inherit">
 				<SearchIcon />
 			</IconButton>
 		</>

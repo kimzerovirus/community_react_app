@@ -2,8 +2,8 @@ import 'src/styles/scss/style.scss';
 
 import { CssBaseline } from '@mui/material';
 import type { AppProps } from 'next/app';
-import CustomThemeProvider from 'src/components/CustomThemeProvider';
 import GlobalStyle from 'src/styles/GlobalStyle';
+import CustomThemeProvider from 'src/styles/theme/CustomThemeProvider';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
 	return (

@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import { Container } from '@mui/material';
 import { FC, ReactNode } from 'react';
-import DefaultLayout from 'src/components/common/DefaultLayout';
 import { PagingProps, PostProps } from 'src/utils/staticDataUtils';
 
 import Pagination from '../common/Pagination';
@@ -9,12 +8,12 @@ import Post from './PostItem';
 
 interface PostListProps {
 	posts: PostProps[];
-	paging: PagingProps;
+	paging?: PagingProps;
 }
 
 const PostList: FC<PostListProps> = ({ posts, paging }) => {
 	return (
-		<DefaultLayout maxWidth="md" isBorder>
+		<>
 			<PostListWrapper>
 				{posts.map((post, index) => (
 					<Post
@@ -25,8 +24,9 @@ const PostList: FC<PostListProps> = ({ posts, paging }) => {
 					/>
 				))}
 			</PostListWrapper>
-			<Pagination paging={paging} />
-		</DefaultLayout>
+
+			{paging ? <Pagination paging={paging} /> : <></>}
+		</>
 	);
 };
 

@@ -101,7 +101,7 @@ export const usePaging = (
 	setSlicedPosts: Dispatch<SetStateAction<PostProps[]>>,
 	setPaging: Dispatch<SetStateAction<PagingProps>>,
 	posts: PostProps[],
-	PER_PAGE = 10,
+	PER_PAGE = 8,
 ) => {
 	const router = useRouter();
 
@@ -121,7 +121,7 @@ export const usePaging = (
 		const { page } = router.query;
 		const currentPage =
 			page === undefined ? 1 : Number(page) > posts.length ? posts.length : Number(page);
-		console.log(currentPage);
+
 		const start = (currentPage - 1) * PER_PAGE;
 		const end = currentPage * PER_PAGE;
 		const totalPages =
