@@ -174,7 +174,8 @@ export const readAllFiles = (sub: string) => {
 		posts.push(...postsByYear);
 	});
 
-	yearList.unshift({ year: '모든글', total: posts.length });
+	const list = yearList.reverse();
+	list.unshift({ year: '모든글', total: posts.length });
 	posts.forEach(post => post.frontmatter.tags?.forEach(tag => tagList.add(tag)));
 
 	return {
@@ -182,7 +183,7 @@ export const readAllFiles = (sub: string) => {
 			posts: posts.reverse(),
 			archive: {
 				tagList: Array.from(tagList),
-				yearList,
+				yearList: list,
 			},
 		},
 	};

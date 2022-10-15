@@ -70,7 +70,6 @@ const YearList: FC<YearListProps> = ({ yearList, selected }) => {
 				<li key={key} className={year === selected ? 'active' : ''}>
 					{key > 0 ? (
 						<Link href={{ pathname: basepath, query: { year } }}>
-							{/* key 가 0이면 모든글이다. */}
 							<a>
 								<span>{year}년</span>
 								<span>{total}</span>
