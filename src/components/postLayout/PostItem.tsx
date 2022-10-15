@@ -27,7 +27,7 @@ export default function PostItem({ link, frontmatter, filename }: PostProps) {
 						component="p"
 						sx={{
 							// color: '#afafaf',
-							opacity: 0.4,
+							opacity: 0.5,
 						}}
 					>
 						{dateFormat(frontmatter.date)}

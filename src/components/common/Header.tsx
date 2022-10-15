@@ -7,18 +7,13 @@ import { Button, Container, Grid, IconButton, Toolbar, Typography } from '@mui/m
 import { Box } from '@mui/system';
 import { useContext } from 'react';
 import { animated, useTransition } from 'react-spring';
+import DrawerMenu from 'src/components/common/DrawerMenu';
 import {
 	ColorMode,
 	ThemeContext,
 	useTheme,
 	useToggleTheme,
 } from 'src/styles/theme/CustomThemeProvider';
-
-import SideBar from './SideBar';
-
-interface HeaderProps {
-	isBorder?: boolean;
-}
 
 const menuList = [
 	{ name: 'home', link: '/' },
@@ -96,6 +91,10 @@ export const ButtonGroup = () => {
 	);
 };
 
+interface HeaderProps {
+	isBorder?: boolean;
+}
+
 /* TODO 모바일 사이즈에서는 돋보기가 없어지고 햄버거 메뉴로 통합 */
 export default function Header({ isBorder }: HeaderProps) {
 	return (
@@ -152,7 +151,7 @@ export default function Header({ isBorder }: HeaderProps) {
 					<Box
 						sx={{ display: { xs: 'flex', sm: 'none' }, width: '100%', justifyContent: 'flex-end' }}
 					>
-						<SideBar menuList={menuList} />
+						<DrawerMenu menuList={menuList} />
 					</Box>
 				</Toolbar>
 			</Container>

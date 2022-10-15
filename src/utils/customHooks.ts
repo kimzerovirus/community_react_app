@@ -98,12 +98,14 @@ export const useIntersectionObserver = (
 };
 
 export const usePaging = (
+	setSelected: Dispatch<SetStateAction<string>>,
 	setSlicedPosts: Dispatch<SetStateAction<PostProps[]>>,
 	setPaging: Dispatch<SetStateAction<PagingProps>>,
 	posts: PostProps[],
 	PER_PAGE = 8,
 ) => {
 	const router = useRouter();
+	const { page, year, tag } = router.query;
 
 	Router.events.on('routeChangeComplete', () => {
 		// router.isReady 는 쿼리스트링 변경이 완료되기 전에 실행되서 값의 변경을 감지하지 못한다.
@@ -118,16 +120,31 @@ export const usePaging = (
 	}, []);
 
 	function callback() {
-		const { page } = router.query;
+		let slicedPosts: PostProps[] = [];
+		let selected = '모든글';
+
+		if (year === undefined && tag === undefined) slicedPosts = posts;
+		else if (year !== undefined) {
+			slicedPosts = posts.filter(post => post.frontmatter.year === year);
+			selected = year as string;
+		} else if (tag !== undefined) {
+			slicedPosts = posts.filter(post => post.frontmatter.tags?.includes(tag as string));
+			selected = tag as string;
+		}
+
 		const currentPage =
-			page === undefined ? 1 : Number(page) > posts.length ? posts.length : Number(page);
+			page === undefined
+				? 1
+				: Number(page) > slicedPosts.length
+				? slicedPosts.length
+				: Number(page);
 
 		const start = (currentPage - 1) * PER_PAGE;
 		const end = currentPage * PER_PAGE;
 		const totalPages =
-			posts.length % PER_PAGE === 0
-				? posts.length / PER_PAGE
-				: Math.floor(posts.length / PER_PAGE) + 1;
+			slicedPosts.length % PER_PAGE === 0
+				? slicedPosts.length / PER_PAGE
+				: Math.floor(slicedPosts.length / PER_PAGE) + 1;
 
 		const pageCounts: number[] = [];
 		let startNum = 1,
@@ -143,7 +160,8 @@ export const usePaging = (
 
 		for (let i = startNum; i <= endNum; i++) pageCounts.push(i);
 
-		setSlicedPosts(posts.slice(start, end));
+		setSelected(selected);
+		setSlicedPosts(slicedPosts.slice(start, end));
 		setPaging({
 			isFirst: currentPage === 1 ? true : false,
 			isLast: currentPage === totalPages ? true : false,

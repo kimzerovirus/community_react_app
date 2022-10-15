@@ -12,11 +12,22 @@ export interface PostProps {
 	frontmatter: {
 		title: string;
 		date: string;
+		year: string;
 		except?: string;
 		tags?: string[];
-		cover_image?: string;
+		coverImage?: string;
 	};
 	filename: string;
+}
+
+export interface ArchiveProps {
+	tagList: string[];
+	yearList: YearProps[];
+}
+
+export interface YearProps {
+	year: string;
+	total: number;
 }
 
 export interface PagingProps {
@@ -25,22 +36,6 @@ export interface PagingProps {
 	currentPage: number;
 	totalPages: number;
 	pageCounts: number[];
-}
-
-export interface StaticProps {
-	htmlstring: string;
-	data: {
-		title: string;
-		date: string;
-		except?: string;
-		cover_image?: string;
-	};
-	indexes: IndexProps[];
-}
-
-export interface IndexProps {
-	depth: number;
-	title: string;
 }
 
 export interface PathProps {
@@ -56,6 +51,23 @@ export interface ParamProps {
 		day: string;
 		filename: string;
 	};
+}
+
+export interface StaticProps {
+	htmlstring: string;
+	data: {
+		title: string;
+		date: string;
+		except?: string;
+		tags?: string[];
+		cover_image?: string;
+	};
+	indexes: IndexProps[];
+}
+
+export interface IndexProps {
+	depth: number;
+	title: string;
 }
 
 // 포스팅 데이터 가져오기
@@ -130,36 +142,48 @@ export const readFile = (folderPath: string) => {
 /* 해당 카테고리 전체 파일 찾기 */
 export const readAllFiles = (sub: string) => {
 	const posts: PostProps[] = [];
+	const yearList: { year: string; total: number }[] = [];
+	const tagList = new Set(); // 태그 중복제거 필요함
+
 	const folders = fs.readdirSync(path.join(sub));
 
 	folders.forEach(year => {
-		posts.push(
-			...fs.readdirSync(path.join(sub, year)).map(file => {
-				const splitFile = file.split('-');
-				const month = splitFile[1];
-				const day = splitFile[2];
-				const filename = splitFile[3].replace('.md', '');
+		const postsByYear = fs.readdirSync(path.join(sub, year)).map(file => {
+			const splitFile = file.split('-');
+			const month = splitFile[1];
+			const day = splitFile[2];
+			const filename = splitFile[3].replace('.md', '');
 
-				const markdownWithMeta = fs.readFileSync(path.join(path.join(sub, year), file), 'utf-8');
-				const { data: frontmatter, content } = matter(markdownWithMeta);
+			const markdownWithMeta = fs.readFileSync(path.join(path.join(sub, year), file), 'utf-8');
+			const { data: frontmatter, content } = matter(markdownWithMeta);
 
-				const reg = /[`~@#$%^&*()_|+\-='",<>\{\}\[\]\\\/]/gim;
-				frontmatter.except = content.replace(reg, '').substring(0, 360);
+			const reg = /[`~@#$%^&*()_|+\-='",<>\{\}\[\]\\\/]/gim;
+			frontmatter.except = content.replace(reg, '').substring(0, 360);
+			frontmatter.year = year;
 
-				return {
-					link: path
-						.join(sub, year, month, day, filename)
-						.replace(process.env.NEXT_PUBLIC_ROOT_FOLDER as string, '/post'),
-					filename,
-					frontmatter,
-				} as PostProps;
-			}),
-		);
+			return {
+				link: path
+					.join(sub, year, month, day, filename)
+					.replace(process.env.NEXT_PUBLIC_ROOT_FOLDER as string, '/post'),
+				filename,
+				frontmatter,
+			} as PostProps;
+		});
+
+		yearList.push({ year, total: postsByYear.length });
+		posts.push(...postsByYear);
 	});
+
+	yearList.unshift({ year: '모든글', total: posts.length });
+	posts.forEach(post => post.frontmatter.tags?.forEach(tag => tagList.add(tag)));
 
 	return {
 		props: {
 			posts: posts.reverse(),
+			archive: {
+				tagList: Array.from(tagList),
+				yearList,
+			},
 		},
 	};
 };
@@ -209,3 +233,31 @@ export const makeListPath = (
 		fallback: false,
 	};
 };
+
+/* 파일 리스트 경로 by year */
+// export const makeListByYearPath = (
+// 	rootFolder: string = process.env.NEXT_PUBLIC_ROOT_FOLDER as string,
+// ) => {
+// 	const subs = fs.readdirSync(path.join(rootFolder));
+
+// 	const paths: {
+// 		params: {
+// 			sub: string;
+// 			year: string;
+// 		};
+// 	}[] = [];
+
+// 	for (const sub of subs) {
+// 		for (const year of fs
+// 			.readdirSync(path.join(rootFolder, sub), { withFileTypes: true })
+// 			.filter(dirent => dirent.isDirectory())
+// 			.map(dirent => dirent.name)) {
+// 			paths.push({ params: { sub, year } });
+// 		}
+// 	}
+
+// 	return {
+// 		paths,
+// 		fallback: false,
+// 	};
+// };

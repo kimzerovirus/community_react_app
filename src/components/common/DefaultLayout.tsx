@@ -20,7 +20,7 @@ const DefaultLayout: FC<DefaultLayoutProps> = ({ children, isBorder, maxWidth, s
 					{children}
 				</Container>
 			</WrappedComponent>
-			<Footer />
+			<Footer isBorder={isBorder} />
 		</Wrapper>
 	);
 };

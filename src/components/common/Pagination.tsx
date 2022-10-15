@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { FirstPage, LastPage, NavigateBefore, NavigateNext } from '@mui/icons-material';
 import { Box } from '@mui/material';
 import Link from 'next/link';
+import Router, { useRouter } from 'next/router';
 import { FC, ReactNode } from 'react';
 import { PagingProps } from 'src/utils/staticDataUtils';
 
@@ -27,42 +28,55 @@ const LinkIconWrapper: FC<LinkIconWrapperProps> = ({ children, path, isDisable }
 );
 
 const Pagination: FC<PaginationProps> = ({ paging }) => {
-	const path = window.location.pathname;
+	const router = useRouter();
+	const basepath = window.location.pathname;
+	const isQuery = router.asPath.split('?')[1];
+
+	const makePath = (page: number) => {
+		if (isQuery) {
+			const querystring = isQuery.split('&')[0].split('=');
+
+			if (querystring[0] !== 'page') {
+				return {
+					pathname: basepath,
+					query: {
+						[querystring[0]]: querystring[1],
+						page,
+					},
+				};
+			}
+		}
+
+		return {
+			pathname: basepath,
+			query: {
+				page,
+			},
+		};
+	};
 
 	return (
 		<Box sx={{ display: 'flex', justifyContent: 'center' }}>
 			<Pageinate>
 				{paging.pageCounts ? (
 					<>
-						<LinkIconWrapper
-							path={{ pathname: path, query: { page: 1 } }}
-							isDisable={paging.isFirst}
-						>
+						<LinkIconWrapper path={makePath(1)} isDisable={paging.isFirst}>
 							<FirstPage />
 						</LinkIconWrapper>
-						<LinkIconWrapper
-							path={{ pathname: path, query: { page: paging.pageCounts[0] - 1 } }}
-							isDisable={paging.isFirst}
-						>
+						<LinkIconWrapper path={makePath(paging.pageCounts[0] - 1)} isDisable={paging.isFirst}>
 							<NavigateBefore />
 						</LinkIconWrapper>
 
 						{paging.pageCounts.map(pageNum => (
-							<Link href={{ pathname: path, query: { page: pageNum } }} key={pageNum}>
+							<Link href={makePath(pageNum)} key={pageNum}>
 								<a className={paging.currentPage === pageNum ? 'active' : ''}>{pageNum}</a>
 							</Link>
 						))}
 
-						<LinkIconWrapper
-							path={{ pathname: path, query: { page: paging.pageCounts[4] + 1 } }}
-							isDisable={paging.isLast}
-						>
+						<LinkIconWrapper path={makePath(paging.pageCounts[4] + 1)} isDisable={paging.isLast}>
 							<NavigateNext />
 						</LinkIconWrapper>
-						<LinkIconWrapper
-							path={{ pathname: path, query: { page: paging.totalPages } }}
-							isDisable={paging.isLast}
-						>
+						<LinkIconWrapper path={makePath(paging.totalPages)} isDisable={paging.isLast}>
 							<LastPage />
 						</LinkIconWrapper>
 					</>
@@ -75,7 +89,7 @@ const Pagination: FC<PaginationProps> = ({ paging }) => {
 };
 
 const Pageinate = styled.div`
-	margin: 20px 0 0;
+	margin-bottom: 3rem;
 	clear: both;
 	display: flex;
 

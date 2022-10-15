@@ -1,7 +1,7 @@
 import { colors } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 
-const breakpoints = {
+export const breakpoints = {
 	values: {
 		xs: 0,
 		sm: 760,
