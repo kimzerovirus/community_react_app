@@ -68,17 +68,23 @@ const YearList: FC<YearListProps> = ({ yearList, selected }) => {
 		<YearListWrapper>
 			{yearList.map(({ year, total }, key) => (
 				<li key={key} className={year === selected ? 'active' : ''}>
-					<Link
-						href={
-							year !== '모든글' ? { pathname: basepath, query: { year } } : { pathname: basepath }
-						}
-					>
-						{/* key 가 0이면 모든글이다. */}
-						<a>
-							<span>{key > 0 ? <>{year}년</> : <>{year}</>}</span>
-							<span>{total}</span>
-						</a>
-					</Link>
+					{key > 0 ? (
+						<Link href={{ pathname: basepath, query: { year } }}>
+							{/* key 가 0이면 모든글이다. */}
+							<a>
+								<span>{year}년</span>
+								<span>{total}</span>
+							</a>
+						</Link>
+					) : (
+						<Link href={{ pathname: basepath }}>
+							{/* key 가 0이면 모든글이다. */}
+							<a>
+								<span>{year}</span>
+								<span>{total}</span>
+							</a>
+						</Link>
+					)}
 				</li>
 			))}
 		</YearListWrapper>
