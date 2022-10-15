@@ -6,19 +6,16 @@ interface TagProps {
 	tagname: string;
 	query: { tag: string };
 	selected?: string;
+	pathname: string;
 }
 
-const Tag: FC<TagProps> = ({ tagname, query, selected }) => {
-	const pathname = window.location.pathname;
-
-	return (
-		<TagWrapper className={selected === tagname ? 'active' : ''}>
-			<Link href={{ pathname, query }}>
-				<a>#{tagname}</a>
-			</Link>
-		</TagWrapper>
-	);
-};
+const Tag: FC<TagProps> = ({ tagname, query, selected, pathname }) => (
+	<TagWrapper className={selected === tagname ? 'active' : ''}>
+		<Link href={{ pathname, query }}>
+			<a>#{tagname}</a>
+		</Link>
+	</TagWrapper>
+);
 
 const TagWrapper = styled.div`
 	background: rgba(128, 128, 128, 0.36);

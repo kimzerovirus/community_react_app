@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { PrismAsync as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { CopyIcon, PasteIcon } from 'src/components/Icons';
+import { CopyIcon, PasteIcon } from 'src/components/common/Icons';
 // import { twilight } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import { useTheme } from 'src/styles/theme/CustomThemeProvider';
 import syntaxTheme from 'src/styles/theme/syntaxTheme';

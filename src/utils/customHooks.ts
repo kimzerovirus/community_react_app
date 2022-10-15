@@ -34,12 +34,6 @@ export const usePreventCopy = () => {
 	}, []);
 };
 
-export const useScrollSpy = () => {
-	useEffect(() => {
-		console.log('spy');
-	});
-};
-
 // https://github.com/emgoto/emgoto.com/blob/master/src/components/table-of-contents/utils.js
 // export const useIntersectionObserver: VF<ObserverProps> = ({ setActiveId, htmlstring }) => {
 export const useIntersectionObserver = (
@@ -84,7 +78,7 @@ export const useIntersectionObserver = (
 
 		// header 영역 사이즈, 하단 감시 안할 영역 40%
 		const observer = new IntersectionObserver(callback, {
-			rootMargin: '110px 0px -40% 0px',
+			rootMargin: '80px 0px -40% 0px',
 		});
 
 		const headingElements = Array.from(document.querySelectorAll('h2, h3, h4, h5'));

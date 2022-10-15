@@ -1,19 +1,23 @@
 import styled from '@emotion/styled';
-import { TagSharp } from '@mui/icons-material';
-import { Container, Typography } from '@mui/material';
+import { Home, LibraryBooksOutlined } from '@mui/icons-material';
+import { Container, IconButton, Typography } from '@mui/material';
 import React, { FC } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
 import DefaultLayout from 'src/components/common/DefaultLayout';
+import { GithubIcon } from 'src/components/common/Icons';
 import markDownBlocks from 'src/components/markdownBlocks';
 import Toc from 'src/components/markdownBlocks/Toc';
+import Comment from 'src/components/postLayout/Comment';
 import Tag from 'src/components/postLayout/Tag';
 import { usePreventCopy } from 'src/utils/customHooks';
 import { dateFormat } from 'src/utils/dateFormat';
 import { StaticProps } from 'src/utils/staticDataUtils';
 
 export default function PostView({ htmlstring, data, indexes }: StaticProps) {
+	const path = window.location.pathname.split('/');
+	const basepath = '/' + path[1] + '/' + path[2];
 	usePreventCopy();
 
 	return (
@@ -52,8 +56,22 @@ export default function PostView({ htmlstring, data, indexes }: StaticProps) {
 							.replace(/@\$_%!\^/gi, '**')
 							.replace(/<\/?u>/gi, '*')}
 					</ReactMarkdown>
-
+				</Container>
+				<Container maxWidth="md" sx={{ marginTop: '12rem' }}>
+					{/* 하단 아이콘 리스트 보류... */}
+					<IconGroup>
+						<IconButton href="https://github.com/kimzerovirus">
+							<GithubIcon />
+						</IconButton>
+						<IconButton href="https://kimzerovirus.github.io/">
+							<Home />
+						</IconButton>
+						<IconButton href={basepath}>
+							<LibraryBooksOutlined />
+						</IconButton>
+					</IconGroup>
 					{data.tags && data.tags?.length > 0 ? <TagList tags={data.tags} /> : <></>}
+					<Comment />
 				</Container>
 			</div>
 		</DefaultLayout>
@@ -69,6 +87,19 @@ export default function PostView({ htmlstring, data, indexes }: StaticProps) {
 // 		margin: 1rem auto 3rem;
 // 	}
 // `;
+
+const IconGroup = styled.div`
+	display: flex;
+	border-bottom: 1px solid rgba(128, 128, 128, 0.36);
+	margin-bottom: 2rem;
+
+	svg {
+		color: rgba(128, 128, 128, 0.36);
+		cursor: pointer;
+		width: 2rem;
+		height: 2rem;
+	}
+`;
 
 const TitleTypo = styled.h1`
 	color: #6868ac;
@@ -91,15 +122,19 @@ interface TagListProps {
 	tags: string[];
 }
 
-const TagList: FC<TagListProps> = ({ tags }) => (
-	<TagListWrapper>
-		{tags.map((tag, key) => (
-			<Tag key={key} query={{ tag }} tagname={tag} />
-		))}
-	</TagListWrapper>
-);
+const TagList: FC<TagListProps> = ({ tags }) => {
+	const path = window.location.pathname.split('/');
+	const basepath = '/' + path[1] + '/' + path[2];
+
+	return (
+		<TagListWrapper>
+			{tags.map((tag, key) => (
+				<Tag key={key} query={{ tag }} tagname={tag} pathname={basepath} />
+			))}
+		</TagListWrapper>
+	);
+};
 
 const TagListWrapper = styled.div`
 	width: 100%;
-	margin: 3rem 0 12rem;
 `;

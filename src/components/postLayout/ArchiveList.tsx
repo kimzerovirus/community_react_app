@@ -111,13 +111,17 @@ interface TagListProps {
 	selected: string;
 }
 
-const TagList: FC<TagListProps> = ({ tagList, selected }) => (
-	<>
-		{tagList.map((tag, key) => (
-			<Tag key={key} query={{ tag }} selected={selected} tagname={tag} />
-		))}
-	</>
-);
+const TagList: FC<TagListProps> = ({ tagList, selected }) => {
+	const basepath = window.location.pathname;
+
+	return (
+		<>
+			{tagList.map((tag, key) => (
+				<Tag key={key} query={{ tag }} selected={selected} tagname={tag} pathname={basepath} />
+			))}
+		</>
+	);
+};
 
 interface TitleTypoProps {
 	title: string;
