@@ -82,7 +82,7 @@ const TitleTypo = styled.h1`
 
 	@media (max-width: 760px) {
 		//모바일
-		margin: 1rem 0 0;
+		margin: 3rem 0 0;
 		font-size: 2rem;
 	}
 `;
