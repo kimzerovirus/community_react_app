@@ -51,6 +51,7 @@ const ArchiveBox = styled.div`
 
 		.active {
 			background-color: #6868ac;
+			color: #fff;
 		}
 	}
 `;
