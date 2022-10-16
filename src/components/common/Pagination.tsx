@@ -12,20 +12,20 @@ interface PaginationProps {
 	paging: PagingProps;
 }
 
-interface LinkIconWrapperProps {
-	children: ReactNode;
-	path: {
-		pathname: string;
-		query: { page: number };
-	};
-	isDisable: boolean;
-}
+// interface LinkIconWrapperProps {
+// 	children: ReactNode;
+// 	path: {
+// 		pathname: string;
+// 		query: { page: number };
+// 	};
+// 	isDisable: boolean;
+// }
 
-const LinkIconWrapper: FC<LinkIconWrapperProps> = ({ children, path, isDisable }) => (
-	<Link href={path}>
-		<a className={isDisable ? 'disable' : ''}>{children}</a>
-	</Link>
-);
+// const LinkIconWrapper: FC<LinkIconWrapperProps> = ({ children, path, isDisable }) => (
+// 	<Link href={path}>
+// 		<a className={isDisable ? 'disable' : ''}>{children}</a>
+// 	</Link>
+// );
 
 const Pagination: FC<PaginationProps> = ({ paging }) => {
 	const router = useRouter();
@@ -60,12 +60,17 @@ const Pagination: FC<PaginationProps> = ({ paging }) => {
 			<Pageinate>
 				{paging.pageCounts ? (
 					<>
-						<LinkIconWrapper path={makePath(1)} isDisable={paging.isFirst}>
-							<FirstPage />
-						</LinkIconWrapper>
-						<LinkIconWrapper path={makePath(paging.pageCounts[0] - 1)} isDisable={paging.isFirst}>
-							<NavigateBefore />
-						</LinkIconWrapper>
+						<Link href={makePath(1)}>
+							<a>
+								<FirstPage />
+							</a>
+						</Link>
+
+						<Link href={paging.isPrev ? makePath(paging.pageCounts[0] - 1) : makePath(1)}>
+							<a>
+								<NavigateBefore />
+							</a>
+						</Link>
 
 						{paging.pageCounts.map(pageNum => (
 							<Link href={makePath(pageNum)} key={pageNum}>
@@ -73,12 +78,20 @@ const Pagination: FC<PaginationProps> = ({ paging }) => {
 							</Link>
 						))}
 
-						<LinkIconWrapper path={makePath(paging.pageCounts[4] + 1)} isDisable={paging.isLast}>
-							<NavigateNext />
-						</LinkIconWrapper>
-						<LinkIconWrapper path={makePath(paging.totalPages)} isDisable={paging.isLast}>
-							<LastPage />
-						</LinkIconWrapper>
+						<Link
+							href={
+								paging.isNext ? makePath(paging.pageCounts[4] + 1) : makePath(paging.totalPages)
+							}
+						>
+							<a>
+								<NavigateNext />
+							</a>
+						</Link>
+						<Link href={makePath(paging.totalPages)}>
+							<a>
+								<LastPage />
+							</a>
+						</Link>
 					</>
 				) : (
 					<></>

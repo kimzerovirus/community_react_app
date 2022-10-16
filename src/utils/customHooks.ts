@@ -159,6 +159,8 @@ export const usePaging = (
 		setPaging({
 			isFirst: currentPage === 1 ? true : false,
 			isLast: currentPage === totalPages ? true : false,
+			isPrev: !pageCounts.includes(1), // 1 페이지를 포함하고 있으면 이전 리스트가 없는 것
+			isNext: !pageCounts.includes(endNum), // 마지막 페이지를 포함하면 이후 리스트가 없는 것
 			currentPage,
 			totalPages,
 			pageCounts,

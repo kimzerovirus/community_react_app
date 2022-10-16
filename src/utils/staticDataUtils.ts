@@ -33,6 +33,8 @@ export interface YearProps {
 export interface PagingProps {
 	isFirst: boolean;
 	isLast: boolean;
+	isPrev: boolean;
+	isNext: boolean;
 	currentPage: number;
 	totalPages: number;
 	pageCounts: number[];
