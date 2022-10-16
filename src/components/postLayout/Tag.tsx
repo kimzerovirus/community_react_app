@@ -20,7 +20,7 @@ const Tag: FC<TagProps> = ({ tagname, query, selected, pathname }) => (
 const TagWrapper = styled.div`
 	background: rgba(128, 128, 128, 0.36);
 	display: inline-block;
-	font-size: 14px;
+	font-size: 0.875rem;
 	padding: 0.25rem 0.5rem;
 	margin: 0 0.25rem 0.25rem 0;
 `;

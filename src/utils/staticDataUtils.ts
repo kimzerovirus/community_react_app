@@ -13,6 +13,7 @@ export interface PostProps {
 		title: string;
 		date: string;
 		year: string;
+		series: string;
 		except?: string;
 		tags?: string[];
 		coverImage?: string;
@@ -22,11 +23,12 @@ export interface PostProps {
 
 export interface ArchiveProps {
 	tagList: string[];
-	yearList: YearProps[];
+	yearList: ArchiveInfoProps[];
+	seriesList: ArchiveInfoProps[];
 }
 
-export interface YearProps {
-	year: string;
+export interface ArchiveInfoProps {
+	title: string;
 	total: number;
 }
 
@@ -65,6 +67,8 @@ export interface StaticProps {
 		cover_image?: string;
 	};
 	indexes: IndexProps[];
+	serieslist?: { link: string; title: string }[];
+	prevnext: { link: string; title: string }[];
 }
 
 export interface IndexProps {
@@ -100,11 +104,59 @@ export const getParsedMarkdown = ({ params: { sub, year, month, day, filename } 
 			return { title: title.split('# ')[1].replace(/`/g, '').trim(), depth };
 		});
 
+	// TODO 이전글과 다음글 그리고 시리즈 리스트를 가져오기 위해 전체글을 순회하여 탐색하였는데 개선이 필요할 것 같다.
+	// 예를 들면 전체리스트를 간추려서 json 파일로 저장해 두고 그 파일에서 가져오는 방법 등이 있을 것 같다.
+	const folderPath = path.join(process.env.NEXT_PUBLIC_ROOT_FOLDER as string, sub);
+	const folders = fs.readdirSync(folderPath);
+
+	const allposts: { link: string; title: string; series: string }[] = [];
+	const serieslist = [];
+	const prevnext = []; // 1. prev 2. next
+
+	folders.forEach(year => {
+		const tempPost = fs.readdirSync(path.join(folderPath, year)).map(file => {
+			const splitFile = file.split('-');
+			const month = splitFile[1];
+			const day = splitFile[2];
+			const filename = splitFile[3].replace('.md', '');
+
+			const markdownWithMeta = fs.readFileSync(
+				path.join(path.join(folderPath, year), file),
+				'utf-8',
+			);
+			const { data: frontmatter } = matter(markdownWithMeta);
+
+			return {
+				link: path
+					.join(sub, year, month, day, filename)
+					.replace(process.env.NEXT_PUBLIC_ROOT_FOLDER as string, '/post'),
+				title: frontmatter.title,
+				series: frontmatter.series,
+			};
+		});
+
+		allposts.push(...tempPost);
+	});
+
+	for (let i = 0; i < allposts.length; i++) {
+		if (allposts[i].title === parsedMarkdown.data.title) {
+			prevnext.push(
+				allposts[i + 1] ? { title: allposts[i + 1].title, link: allposts[i + 1].link } : null, // 이전글
+				allposts[i - 1] ? { title: allposts[i - 1].title, link: allposts[i - 1].link } : null, // 다음글
+			);
+		}
+
+		if (allposts[i].series && allposts[i].series === parsedMarkdown.data.series)
+			serieslist.push(allposts[i]);
+	}
+
 	return {
 		props: {
 			htmlstring: parsedMarkdown.content,
 			data: parsedMarkdown.data,
 			indexes,
+			serieslist,
+			prevnext,
 		},
 	};
 };
@@ -144,8 +196,10 @@ export const readFile = (folderPath: string) => {
 /* 해당 카테고리 전체 파일 찾기 */
 export const readAllFiles = (sub: string) => {
 	const posts: PostProps[] = [];
-	const yearList: { year: string; total: number }[] = [];
+	const yearList: { title: string; total: number }[] = [];
 	const tagList = new Set(); // 태그 중복제거 필요함
+	const seriesList: { title: string; total: number }[] = [];
+	const tempSeriesList: string[] = [];
 
 	const folders = fs.readdirSync(path.join(sub));
 
@@ -162,6 +216,7 @@ export const readAllFiles = (sub: string) => {
 			const reg = /[`~@#$%^&*()_|+\-='",<>\{\}\[\]\\\/]/gim;
 			frontmatter.except = content.replace(reg, '').substring(0, 360);
 			frontmatter.year = year;
+			if (frontmatter.series) tempSeriesList.push(frontmatter.series);
 
 			return {
 				link: path
@@ -172,12 +227,23 @@ export const readAllFiles = (sub: string) => {
 			} as PostProps;
 		});
 
-		yearList.push({ year, total: postsByYear.length });
+		const tempSeriesResult = tempSeriesList.reduce((acc, cur) => {
+			acc[cur] = (acc[cur] || 0) + 1;
+			return acc;
+		}, {} as any);
+
+		Object.keys(tempSeriesResult).forEach((title, index) => {
+			seriesList.push({
+				title,
+				total: Number(Object.values(tempSeriesResult)[index]),
+			});
+		});
+		yearList.push({ title: year, total: postsByYear.length });
 		posts.push(...postsByYear);
 	});
 
-	const list = yearList.reverse();
-	list.unshift({ year: '모든글', total: posts.length });
+	const tempYearlist = yearList.reverse();
+	tempYearlist.unshift({ title: '모든글', total: posts.length });
 	posts.forEach(post => post.frontmatter.tags?.forEach(tag => tagList.add(tag)));
 
 	return {
@@ -185,7 +251,8 @@ export const readAllFiles = (sub: string) => {
 			posts: posts.reverse(),
 			archive: {
 				tagList: Array.from(tagList),
-				yearList: list,
+				yearList: tempYearlist,
+				seriesList,
 			},
 		},
 	};

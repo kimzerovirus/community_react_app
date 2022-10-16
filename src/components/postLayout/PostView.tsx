@@ -15,7 +15,7 @@ import { usePreventCopy } from 'src/utils/customHooks';
 import { dateFormat } from 'src/utils/dateFormat';
 import { StaticProps } from 'src/utils/staticDataUtils';
 
-export default function PostView({ htmlstring, data, indexes }: StaticProps) {
+export default function PostView({ htmlstring, data, indexes, serieslist, prevnext }: StaticProps) {
 	const path = window.location.pathname.split('/');
 	const basepath = '/' + path[1] + '/' + path[2];
 	usePreventCopy();

@@ -3,7 +3,7 @@ import { Typography } from '@mui/material';
 import Link from 'next/link';
 import React, { FC } from 'react';
 import Tag from 'src/components/postLayout/Tag';
-import { ArchiveProps, YearProps } from 'src/utils/staticDataUtils';
+import { ArchiveInfoProps, ArchiveProps } from 'src/utils/staticDataUtils';
 
 interface ArchiveListProps {
 	archive: ArchiveProps;
@@ -15,10 +15,13 @@ const ArchiveList: FC<ArchiveListProps> = ({ archive, selected }) => {
 		<ArchiveBox>
 			<div className="sticky">
 				<TitleTypo title="archive" />
-				<YearList yearList={archive.yearList} selected={selected} />
+				<ArchiveYearList archiveInfo={archive.yearList} selected={selected} />
 
 				<TitleTypo title="tag" />
 				<TagList tagList={archive.tagList} selected={selected} />
+
+				<TitleTypo title="series" />
+				<ArchiveSeriesList archiveInfo={archive.seriesList} selected={selected} />
 			</div>
 		</ArchiveBox>
 	);
@@ -56,22 +59,22 @@ const ArchiveBox = styled.div`
 	}
 `;
 
-interface YearListProps {
-	yearList: YearProps[];
+interface ArchiveInfoListProps {
+	archiveInfo: ArchiveInfoProps[];
 	selected: string;
 }
 
-const YearList: FC<YearListProps> = ({ yearList, selected }) => {
+const ArchiveYearList: FC<ArchiveInfoListProps> = ({ archiveInfo, selected }) => {
 	const basepath = window.location.pathname;
 
 	return (
-		<YearListWrapper>
-			{yearList.map(({ year, total }, key) => (
-				<li key={key} className={year === selected ? 'active' : ''}>
+		<ArchiveInfoListWrapper>
+			{archiveInfo.map(({ title, total }, key) => (
+				<li key={key} className={title === selected ? 'active' : ''}>
 					{key > 0 ? (
-						<Link href={{ pathname: basepath, query: { year } }}>
+						<Link href={{ pathname: basepath, query: { year: title } }}>
 							<a>
-								<span>{year}년</span>
+								<span>{title}년</span>
 								<span>{total}</span>
 							</a>
 						</Link>
@@ -79,18 +82,37 @@ const YearList: FC<YearListProps> = ({ yearList, selected }) => {
 						<Link href={{ pathname: basepath }}>
 							{/* key 가 0이면 모든글이다. */}
 							<a>
-								<span>{year}</span>
+								<span>{title}</span>
 								<span>{total}</span>
 							</a>
 						</Link>
 					)}
 				</li>
 			))}
-		</YearListWrapper>
+		</ArchiveInfoListWrapper>
 	);
 };
 
-const YearListWrapper = styled.ul`
+const ArchiveSeriesList: FC<ArchiveInfoListProps> = ({ archiveInfo, selected }) => {
+	const basepath = window.location.pathname;
+
+	return (
+		<ArchiveInfoListWrapper>
+			{archiveInfo.map(({ title, total }, key) => (
+				<li key={key} className={title === selected ? 'active' : ''}>
+					<Link href={{ pathname: basepath, query: { series: title } }}>
+						<a>
+							<span>{title}</span>
+							<span>{total}</span>
+						</a>
+					</Link>
+				</li>
+			))}
+		</ArchiveInfoListWrapper>
+	);
+};
+
+const ArchiveInfoListWrapper = styled.ul`
 	list-style: none;
 	margin: 0;
 	padding: 0;
@@ -102,6 +124,15 @@ const YearListWrapper = styled.ul`
 			display: block;
 			display: flex;
 			justify-content: space-between;
+			span {
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+
+				&:first-of-type {
+					width: calc(100% - 20px);
+				}
+			}
 		}
 	}
 `;

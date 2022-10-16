@@ -99,7 +99,7 @@ export const usePaging = (
 	PER_PAGE = 8,
 ) => {
 	const router = useRouter();
-	const { page, year, tag } = router.query;
+	const { page, year, tag, series } = router.query;
 
 	Router.events.on('routeChangeComplete', () => {
 		// router.isReady 는 쿼리스트링 변경이 완료되기 전에 실행되서 값의 변경을 감지하지 못한다.
@@ -117,13 +117,16 @@ export const usePaging = (
 		let slicedPosts: PostProps[] = [];
 		let selected = '모든글';
 
-		if (year === undefined && tag === undefined) slicedPosts = posts;
+		if (year === undefined && tag === undefined && series === undefined) slicedPosts = posts;
 		else if (year !== undefined) {
 			slicedPosts = posts.filter(post => post.frontmatter.year === year);
 			selected = year as string;
 		} else if (tag !== undefined) {
 			slicedPosts = posts.filter(post => post.frontmatter.tags?.includes(tag as string));
 			selected = tag as string;
+		} else if (series !== undefined) {
+			slicedPosts = posts.filter(post => post.frontmatter.series === series);
+			selected = series as string;
 		}
 
 		const currentPage =

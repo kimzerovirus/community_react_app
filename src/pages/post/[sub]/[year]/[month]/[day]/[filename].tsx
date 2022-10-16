@@ -6,8 +6,22 @@ import {
 	StaticProps,
 } from 'src/utils/staticDataUtils';
 
-export default function ProjectPostPage({ htmlstring, data, indexes }: StaticProps) {
-	return <PostView htmlstring={htmlstring} data={data} indexes={indexes} />;
+export default function ProjectPostPage({
+	htmlstring,
+	data,
+	indexes,
+	serieslist,
+	prevnext,
+}: StaticProps) {
+	return (
+		<PostView
+			htmlstring={htmlstring}
+			data={data}
+			indexes={indexes}
+			serieslist={serieslist}
+			prevnext={prevnext}
+		/>
+	);
 }
 
 export async function getStaticPaths() {
