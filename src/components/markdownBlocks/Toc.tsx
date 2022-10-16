@@ -16,7 +16,7 @@ const Toc: FC<TocProps> = ({ indexes }) => {
 
 	useIntersectionObserver(setActiveId, indexes);
 
-	return indexes ? (
+	return indexes.length > 0 ? (
 		<TocUl>
 			<ul>
 				{indexes.map((index: IndexProps, id: number) => (
