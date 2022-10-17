@@ -1,7 +1,7 @@
 //https://kyounghwan01.github.io/blog/React/next/next-seo/#카카오톡-미리보기-이슈
 //https://medium.com/nextjs/how-to-add-seo-in-the-nextjs-app-4eb745a382a7
 
-const SEO = {
+export const config = {
 	openGraph: {
 		type: 'website',
 		locale: 'ko_KR',
@@ -25,5 +25,3 @@ const SEO = {
 		cardType: 'summary_large_image',
 	},
 };
-
-export default SEO;

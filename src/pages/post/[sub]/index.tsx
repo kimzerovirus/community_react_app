@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 import { NextSeo } from 'next-seo';
-import SEO from 'next-seo.config';
 import { useState } from 'react';
 import DefaultLayout from 'src/components/common/DefaultLayout';
 import ArchiveList from 'src/components/postLayout/ArchiveList';
 import PostList from 'src/components/postLayout/PostList';
+import { config } from 'src/components/SEO/meta';
 import { usePaging } from 'src/utils/customHooks';
 import {
 	ArchiveProps,
@@ -38,7 +38,7 @@ export default function PostListPage({ posts, archive }: PostListPageProps) {
 
 	return (
 		<DefaultLayout maxWidth="xl" isBorder>
-			<NextSeo title={`${SEO_TITLE} | kimzerovirus.log`} openGraph={SEO.openGraph} />
+			<NextSeo title={`${SEO_TITLE} | kimzerovirus.log`} />
 			<CustomGrid>
 				<ArchiveList archive={archive} selected={selected} />
 				<PostList posts={slicedPosts} paging={paging} selected={selected} />

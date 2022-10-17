@@ -5,6 +5,8 @@ yarn deploy-sh [커밋 메시지]
 
 chmod +x deploy.sh
 ./deploy.sh [커밋 메시지]
+
+curl -v -X GET "http://localhost:3000"
 ```
 
 구글에서 여러 *static blog* 자료를 보았지만 대부분이 *jekyll* 또는 *gatsby* 를 기반으로 하고 있다. 하지만 나는 리액트를 공부할겸 만드는 것이므로 *jekyll* 은 후보군에서 제외하였고 남은 선택지는 *gatsby* 와 *next.js* 였는데 사용해 본 적이 없는 *gatsby* 보다는 기존에 사용해 본 적이 있는 *next.js* 를 사용하기로 결정하였다. (리액트 코드는 어차피 *gatsby* 로 만든 블로그와 비슷 하므로 *gatsby* 블로그를 많이 참고하였다.)

@@ -70,6 +70,10 @@ export interface StaticProps {
 	indexes: IndexProps[];
 	serieslist?: { link: string; title: string }[];
 	prevnext: { link: string; title: string }[];
+	seo?: {
+		title: string;
+		description: string;
+	};
 }
 
 export interface IndexProps {

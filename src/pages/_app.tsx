@@ -2,15 +2,14 @@ import 'src/styles/scss/style.scss';
 
 import { CssBaseline } from '@mui/material';
 import type { AppProps } from 'next/app';
-import { DefaultSeo } from 'next-seo';
-import SEO from 'next-seo.config.js';
+import SEO from 'src/components/SEO';
 import GlobalStyle from 'src/styles/GlobalStyle';
 import CustomThemeProvider from 'src/styles/theme/CustomThemeProvider';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<>
-			<DefaultSeo {...SEO} />
+			<SEO seo={pageProps.seo} />
 			<CustomThemeProvider>
 				{/* reset css */}
 				<CssBaseline />
@@ -21,3 +20,14 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 		</>
 	);
 }
+
+// MyApp.getStaticProps = async (context: any) => {
+// 	const { ctx, Component } = context;
+// 	let pageProps = {};
+
+// 	if (Component.getStaticProps) {
+// 		pageProps = (await Component.getStaticProps(ctx)) || {};
+// 		console.log(pageProps);
+// 		return { pageProps };
+// 	}
+// };
