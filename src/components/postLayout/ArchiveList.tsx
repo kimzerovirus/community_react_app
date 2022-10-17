@@ -123,6 +123,7 @@ const ArchiveInfoListWrapper = styled.ul`
 			width: 100%;
 			display: block;
 			display: flex;
+			padding: 0 4px;
 			justify-content: space-between;
 			span {
 				overflow: hidden;

@@ -117,8 +117,9 @@ export const usePaging = (
 		let slicedPosts: PostProps[] = [];
 		let selected = '모든글';
 
-		if (year === undefined && tag === undefined && series === undefined) slicedPosts = posts;
-		else if (year !== undefined) {
+		if (year === undefined && tag === undefined && series === undefined) {
+			slicedPosts = posts;
+		} else if (year !== undefined) {
 			slicedPosts = posts.filter(post => post.frontmatter.year === year);
 			selected = year as string;
 		} else if (tag !== undefined) {

@@ -65,6 +65,7 @@ export interface StaticProps {
 		except?: string;
 		tags?: string[];
 		cover_image?: string;
+		series?: string;
 	};
 	indexes: IndexProps[];
 	serieslist?: { link: string; title: string }[];
@@ -125,11 +126,10 @@ export const getParsedMarkdown = ({ params: { sub, year, month, day, filename } 
 				'utf-8',
 			);
 			const { data: frontmatter } = matter(markdownWithMeta);
+			const link = path.join('/post', sub, year, month, day, filename);
 
 			return {
-				link: path
-					.join(sub, year, month, day, filename)
-					.replace(process.env.NEXT_PUBLIC_ROOT_FOLDER as string, '/post'),
+				link,
 				title: frontmatter.title,
 				series: frontmatter.series,
 			};
@@ -141,8 +141,8 @@ export const getParsedMarkdown = ({ params: { sub, year, month, day, filename } 
 	for (let i = 0; i < allposts.length; i++) {
 		if (allposts[i].title === parsedMarkdown.data.title) {
 			prevnext.push(
-				allposts[i + 1] ? { title: allposts[i + 1].title, link: allposts[i + 1].link } : null, // 이전글
-				allposts[i - 1] ? { title: allposts[i - 1].title, link: allposts[i - 1].link } : null, // 다음글
+				allposts[i - 1] ? { title: allposts[i - 1].title, link: allposts[i - 1].link } : null, // 이전글
+				allposts[i + 1] ? { title: allposts[i + 1].title, link: allposts[i + 1].link } : null, // 다음글
 			);
 		}
 

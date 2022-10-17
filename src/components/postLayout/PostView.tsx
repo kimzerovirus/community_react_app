@@ -1,6 +1,12 @@
 import styled from '@emotion/styled';
-import { Home, LibraryBooksOutlined } from '@mui/icons-material';
+import {
+	Home,
+	KeyboardDoubleArrowLeftRounded,
+	KeyboardDoubleArrowRightRounded,
+	LibraryBooksOutlined,
+} from '@mui/icons-material';
 import { Container, IconButton, Typography } from '@mui/material';
+import Link from 'next/link';
 import React, { FC } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
@@ -10,6 +16,7 @@ import { GithubIcon } from 'src/components/common/Icons';
 import markDownBlocks from 'src/components/markdownBlocks';
 import Toc from 'src/components/markdownBlocks/Toc';
 import Comment from 'src/components/postLayout/Comment';
+import PostSeriesList from 'src/components/postLayout/PostSeriesList';
 import Tag from 'src/components/postLayout/Tag';
 import { usePreventCopy } from 'src/utils/customHooks';
 import { dateFormat } from 'src/utils/dateFormat';
@@ -70,7 +77,13 @@ export default function PostView({ htmlstring, data, indexes, serieslist, prevne
 							<LibraryBooksOutlined />
 						</IconButton>
 					</IconGroup>
+					<PostSeriesList
+						serieslist={serieslist}
+						seriesname={data.series}
+						currentTitle={data.title}
+					/>
 					{data.tags && data.tags?.length > 0 ? <TagList tags={data.tags} /> : <></>}
+					<PrevNextBtnGroup prevnext={prevnext} />
 					<Comment />
 				</Container>
 			</div>
@@ -137,4 +150,78 @@ const TagList: FC<TagListProps> = ({ tags }) => {
 
 const TagListWrapper = styled.div`
 	width: 100%;
+`;
+
+interface PrevNextProps {
+	prevnext: {
+		title: string;
+		link: string;
+	}[];
+}
+
+const PrevNextBtnGroup: FC<PrevNextProps> = ({ prevnext }) => (
+	<PrevNextBtnWrapper>
+		<PrevNextBtn>
+			{prevnext[0] ? (
+				<>
+					<Typography variant="body2" sx={{ opacity: 0.5, paddingLeft: '14px' }}>
+						이전글
+					</Typography>
+					<Link href={prevnext[0].link}>
+						<a style={{ display: 'flex', alignItems: 'center' }}>
+							<KeyboardDoubleArrowLeftRounded sx={{ width: '14px' }} />
+							<span>{prevnext[0].title}</span>
+						</a>
+					</Link>
+				</>
+			) : (
+				<span>첫번째 글입니다.</span>
+			)}
+		</PrevNextBtn>
+		<PrevNextBtn>
+			{prevnext[1] ? (
+				<>
+					<Typography
+						variant="body2"
+						sx={{ opacity: 0.5, paddingRight: '14px', textAlign: 'right' }}
+					>
+						다음글
+					</Typography>
+					<Link href={prevnext[1].link}>
+						<a style={{ display: 'flex', alignItems: 'center' }}>
+							<span>{prevnext[1].title}</span>
+							<KeyboardDoubleArrowRightRounded sx={{ width: '14px' }} />
+						</a>
+					</Link>
+				</>
+			) : (
+				<span>마지막 글입니다.</span>
+			)}
+		</PrevNextBtn>
+	</PrevNextBtnWrapper>
+);
+
+const PrevNextBtnWrapper = styled.div`
+	margin-top: 1rem;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	span {
+		height: 100%;
+		display: flex;
+		align-items: center;
+	}
+`;
+const PrevNextBtn = styled.div`
+	/* width: 50%; */
+	max-width: 50%;
+	padding: 1rem 0;
+	a {
+		font-weight: 500;
+		font-size: 18px;
+		color: #6868ac;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
 `;
