@@ -1,4 +1,6 @@
 import styled from '@emotion/styled';
+import { NextSeo } from 'next-seo';
+import SEO from 'next-seo.config';
 import { useState } from 'react';
 import DefaultLayout from 'src/components/common/DefaultLayout';
 import ArchiveList from 'src/components/postLayout/ArchiveList';
@@ -25,8 +27,18 @@ export default function PostListPage({ posts, archive }: PostListPageProps) {
 
 	usePaging(setSelected, setSlicedPosts, setPaging, posts);
 
+	let SEO_TITLE;
+
+	[
+		{ en: 'project', ko: '프로젝트' },
+		{ en: 'til', ko: '공부' },
+	].forEach(name => {
+		if (window.location.pathname.includes(name.en)) SEO_TITLE = name.ko;
+	});
+
 	return (
 		<DefaultLayout maxWidth="xl" isBorder>
+			<NextSeo title={`${SEO_TITLE} | kimzerovirus.log`} openGraph={SEO.openGraph} />
 			<CustomGrid>
 				<ArchiveList archive={archive} selected={selected} />
 				<PostList posts={slicedPosts} paging={paging} selected={selected} />

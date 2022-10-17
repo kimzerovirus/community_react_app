@@ -9,7 +9,7 @@ export default function Home() {
 	return (
 		<DefaultLayout maxWidth="xl">
 			<Head>
-				<title>kimzerovirus.log</title>
+				<title>홈 | kimzerovirus.log</title>
 			</Head>
 
 			{/* mobile */}

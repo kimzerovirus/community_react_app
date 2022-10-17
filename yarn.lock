@@ -5852,10 +5852,10 @@
   "resolved" "https://registry.npmjs.org/neo-async/-/neo-async-2.6.2.tgz"
   "version" "2.6.2"
 
-"next-seo@^5.5.0":
-  "integrity" "sha512-5ouBHFtx8YrSDW44lj0qIEQ+oMcz6stgoITB+SqHUZbhgizoJsyLmq73gJ0lxtEKpcN8vG2QgRIJfdb8OAPChw=="
-  "resolved" "https://registry.npmjs.org/next-seo/-/next-seo-5.5.0.tgz"
-  "version" "5.5.0"
+"next-seo@^5.6.0":
+  "integrity" "sha512-6o7OJq+/V7ZrijayG94BvNOYLQg9xQp0OAwLpA5kdlSei3mYsVbSB32UBIqSxT6uqRf55Jmd56ScG65IDnJShw=="
+  "resolved" "https://registry.npmjs.org/next-seo/-/next-seo-5.6.0.tgz"
+  "version" "5.6.0"
 
 "next-sitemap@^3.1.22":
   "integrity" "sha512-aykbwYTNJ2GKSuxYpXgKK7m/a1Qao03ekUlsNLHvO8XuTTVZDAOe2hGcJtr2vQfXnLeZuSpNUs2IP6hCr4xVZA=="

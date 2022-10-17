@@ -108,7 +108,10 @@ export const getParsedMarkdown = ({ params: { sub, year, month, day, filename } 
 	// TODO 이전글과 다음글 그리고 시리즈 리스트를 가져오기 위해 전체글을 순회하여 탐색하였는데 개선이 필요할 것 같다.
 	// 예를 들면 전체리스트를 간추려서 json 파일로 저장해 두고 그 파일에서 가져오는 방법 등이 있을 것 같다.
 	const folderPath = path.join(process.env.NEXT_PUBLIC_ROOT_FOLDER as string, sub);
-	const folders = fs.readdirSync(folderPath);
+	const folders = fs
+		.readdirSync(folderPath, { withFileTypes: true })
+		.filter(dirent => dirent.isDirectory())
+		.map(dirent => dirent.name);
 
 	const allposts: { link: string; title: string; series: string }[] = [];
 	const serieslist = [];
@@ -162,36 +165,39 @@ export const getParsedMarkdown = ({ params: { sub, year, month, day, filename } 
 };
 
 /* 단일 연도 파일 찾기 */
-export const readFile = (folderPath: string) => {
-	// _post/[sub]/[year]
-	const files = fs.readdirSync(path.join(folderPath));
+// export const readFile = (folderPath: string) => {
+// 	// _post/[sub]/[year]
+// 	const files = fs
+// 		.readdirSync(path.join(folderPath), { withFileTypes: true })
+// 		.filter(dirent => dirent.isDirectory())
+// 		.map(dirent => dirent.name);
 
-	const posts = files.map(file => {
-		const splitFile = file.split('-');
-		const month = splitFile[1];
-		const day = splitFile[2];
-		const filename = splitFile[3].replace('.md', '');
-		const markdownWithMeta = fs.readFileSync(path.join(folderPath, file), 'utf-8');
-		const { data: frontmatter, content } = matter(markdownWithMeta);
+// 	const posts = files.map(file => {
+// 		const splitFile = file.split('-');
+// 		const month = splitFile[1];
+// 		const day = splitFile[2];
+// 		const filename = splitFile[3].replace('.md', '');
+// 		const markdownWithMeta = fs.readFileSync(path.join(folderPath, file), 'utf-8');
+// 		const { data: frontmatter, content } = matter(markdownWithMeta);
 
-		const reg = /[`~@#$%^&*()_|+\-='",<>\{\}\[\]\\\/]/gim;
-		frontmatter.except = content.replace(reg, '').substring(0, 10);
+// 		const reg = /[`~@#$%^&*()_|+\-='",<>\{\}\[\]\\\/]/gim;
+// 		frontmatter.except = content.replace(reg, '').substring(0, 10);
 
-		return {
-			link: path
-				.join(folderPath, month, day, filename)
-				.replace(process.env.NEXT_PUBLIC_ROOT_FOLDER as string, '/post'),
-			filename,
-			frontmatter,
-		};
-	});
+// 		return {
+// 			link: path
+// 				.join(folderPath, month, day, filename)
+// 				.replace(process.env.NEXT_PUBLIC_ROOT_FOLDER as string, '/post'),
+// 			filename,
+// 			frontmatter,
+// 		};
+// 	});
 
-	return {
-		props: {
-			posts,
-		},
-	};
-};
+// 	return {
+// 		props: {
+// 			posts,
+// 		},
+// 	};
+// };
 
 /* 해당 카테고리 전체 파일 찾기 */
 export const readAllFiles = (sub: string) => {
@@ -201,7 +207,10 @@ export const readAllFiles = (sub: string) => {
 	const seriesList: { title: string; total: number }[] = [];
 	const tempSeriesList: string[] = [];
 
-	const folders = fs.readdirSync(path.join(sub));
+	const folders = fs
+		.readdirSync(path.join(sub), { withFileTypes: true })
+		.filter(dirent => dirent.isDirectory())
+		.map(dirent => dirent.name);
 
 	folders.forEach(year => {
 		const postsByYear = fs.readdirSync(path.join(sub, year)).map(file => {
@@ -214,7 +223,7 @@ export const readAllFiles = (sub: string) => {
 			const { data: frontmatter, content } = matter(markdownWithMeta);
 
 			const reg = /[`~@#$%^&*()_|+\-='",<>\{\}\[\]\\\/]/gim;
-			frontmatter.except = content.replace(reg, '').substring(0, 360);
+			frontmatter.except = content.substring(0, 360).replace(reg, '');
 			frontmatter.year = year;
 			if (frontmatter.series) tempSeriesList.push(frontmatter.series);
 
@@ -264,7 +273,10 @@ export const makePostPath = (
 ) => {
 	const paths: ParamProps[] = [];
 
-	for (const sub of fs.readdirSync(path.join(rootFolder))) {
+	for (const sub of fs
+		.readdirSync(path.join(rootFolder), { withFileTypes: true })
+		.filter(dirent => dirent.isDirectory())
+		.map(dirent => dirent.name)) {
 		for (const year of fs
 			.readdirSync(path.join(rootFolder, sub), { withFileTypes: true })
 			.filter(dirent => dirent.isDirectory())
@@ -290,7 +302,10 @@ export const makePostPath = (
 export const makeListPath = (
 	rootFolder: string = process.env.NEXT_PUBLIC_ROOT_FOLDER as string,
 ) => {
-	const subs = fs.readdirSync(path.join(rootFolder));
+	const subs = fs
+		.readdirSync(path.join(rootFolder), { withFileTypes: true })
+		.filter(dirent => dirent.isDirectory())
+		.map(dirent => dirent.name);
 
 	const paths = subs.map(sub => ({
 		params: {

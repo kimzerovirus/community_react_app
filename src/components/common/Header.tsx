@@ -17,9 +17,9 @@ import {
 
 const menuList = [
 	{ name: 'home', link: '/' },
-	// { name: '일상', link: '/' },
 	{ name: 'projects', link: '/post/project' },
 	{ name: 'til', link: '/post/til' },
+	// { name: 'etc', link: '/post/etc' },
 ];
 
 const DarkToggleButton = () => (
