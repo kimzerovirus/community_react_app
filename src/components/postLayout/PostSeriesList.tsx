@@ -13,8 +13,7 @@ interface SeriesProps {
 const PostSeriesList: FC<SeriesProps> = ({ serieslist, seriesname, currentTitle }) => {
 	const path = window.location.pathname.split('/');
 	const basepath = '/' + path[1] + '/' + path[2];
-	const toggleDefaultValue = window.localStorage.getItem('seriesToggle') || true;
-	const [isToggle, setIsToggle] = useState(toggleDefaultValue);
+	const [isToggle, setIsToggle] = useState(false);
 
 	const toggleHandler = () => {
 		setIsToggle(bool => !bool);
@@ -42,15 +41,10 @@ const PostSeriesList: FC<SeriesProps> = ({ serieslist, seriesname, currentTitle 
 					<ul>
 						{serieslist.map((series, key) => (
 							<li key={key} className={currentTitle === series.title ? 'active' : ''}>
-								<span>{`${key + 1}.`}</span>
+								<span>{key + 1}.&nbsp;</span>
 								<Link href={{ pathname: series.link }}>{series.title}</Link>
 							</li>
 						))}
-
-						<li>
-							<span>2.</span>
-							<Link href={'/'}>높이 테스트3</Link>
-						</li>
 					</ul>
 				</SeriesBox>
 			) : (
