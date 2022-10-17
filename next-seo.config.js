@@ -7,7 +7,7 @@ const SEO = {
 		locale: 'ko_KR',
 		url: 'https://kimzerovirus.github.io/',
 		title: 'kimzerovirus.log',
-		dscription: 'kimzerovirus의 블로그입니다.',
+		description: 'kimzerovirus의 블로그입니다.',
 		site_name: 'Kimzerovirus.log',
 		images: [
 			{

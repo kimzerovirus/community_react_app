@@ -18,7 +18,7 @@ const ProjectPostPage: FC<StaticProps> = ({ htmlstring, data, indexes, serieslis
 			<NextSeo
 				title={`${data.title} | kimzerovirus.log`}
 				description={SEO_DESCRIPTION}
-				openGraph={SEO.openGraph}
+				// openGraph={SEO.openGraph}
 			/>
 			<PostView
 				htmlstring={htmlstring}
