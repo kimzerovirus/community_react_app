@@ -46,11 +46,6 @@ const MainTypo = () => {
 				variant="h4"
 				sx={{ fontWeight: 'bold', textAlign: { xs: 'center', sm: 'left' } }}
 			>
-				{/* 안녕하세d요<span> </span>
-				<br className="mobile" />
-				빡빡이입니다!
-				<br />
-				오늘도 빡코딩? */}
 				HI,
 				<br />
 				I'M KIMZEROVIRUS
@@ -92,7 +87,6 @@ export async function getStaticProps() {
 		props: {
 			seo: {
 				title: '홈 | kimzerovirus.log',
-				url: 'https://kimzerovirus.github.io',
 			},
 		},
 	};
