@@ -92,6 +92,7 @@ export async function getStaticProps() {
 		props: {
 			seo: {
 				title: '홈 | kimzerovirus.log',
+				url: 'https://kimzerovirus.github.io',
 			},
 		},
 	};
