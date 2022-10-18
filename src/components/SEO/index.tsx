@@ -1,4 +1,4 @@
-import { DefaultSeo, NextSeo } from 'next-seo';
+import Head from 'next/head';
 import { FC } from 'react';
 import { config } from 'src/components/SEO/meta';
 
@@ -10,19 +10,47 @@ interface SEOProps {
 }
 
 const SEO: FC<SEOProps> = ({ seo }) => {
-	console.log(seo);
-	return (
-		<>
-			<DefaultSeo {...config} />
-			{seo ? (
-				<NextSeo
-					title={seo.title}
-					description={seo.description ? seo.description : config.openGraph.description}
-					openGraph={config.openGraph}
-				/>
-			) : null}
-		</>
+	return seo ? (
+		<SEOComponent
+			openGraph={{ ...config.openGraph, title: seo.title, description: seo.description }}
+			twitter={config.twitter}
+		/>
+	) : (
+		<SEOComponent {...config} />
 	);
 };
 
+const SEOComponent: FC<typeof config> = ({ openGraph, twitter }) => (
+	<Head>
+		<title>{openGraph.title}</title>
+
+		<meta name="keywords" content={openGraph.keywords} />
+		<meta name="description" content={openGraph.description} />
+
+		<meta name="application-name" content={openGraph.site_name} />
+		<meta name="msapplication-tooltip" content={openGraph.site_name} />
+
+		<meta property="og:type" content={openGraph.type} />
+		<meta property="og:title" content={openGraph.title} />
+		<meta property="og:description" content={openGraph.description} />
+		<meta property="og:image" content={openGraph.images[0].url} />
+		<meta property="og:url" content={openGraph.url} />
+
+		<meta name="twitter:card" content={twitter.cardType} />
+		<meta name="twitter:title" content={openGraph.title} />
+		<meta name="twitter:description" content={openGraph.description} />
+		<meta name="twitter:image" content={openGraph.images[0].url} />
+		<meta name="twitter:domain" content={openGraph.site_name} />
+	</Head>
+);
+
 export default SEO;
+
+/* <DefaultSeo {...config} />
+{seo ? (
+<NextSeo
+	title={seo.title}
+	description={seo.description ? seo.description : config.openGraph.description}
+	openGraph={config.openGraph}
+/>
+) : null} */
