@@ -9,6 +9,8 @@ export const config = {
 		title: 'kimzerovirus.log',
 		description: 'kimzerovirus의 블로그입니다.',
 		site_name: 'Kimzerovirus.log',
+		keywords:
+			'java, javascript, typescript, kotlin, spring, spring-boot, react, 개발, 개발 블로그, blog',
 		images: [
 			{
 				url: 'https://avatars.githubusercontent.com/u/68390715?s=400&u=325fb149f87913954651f3a8181577475af3b035&v=4',

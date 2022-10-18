@@ -1,10 +1,8 @@
 import styled from '@emotion/styled';
-import { NextSeo } from 'next-seo';
 import { useState } from 'react';
 import DefaultLayout from 'src/components/common/DefaultLayout';
 import ArchiveList from 'src/components/postLayout/ArchiveList';
 import PostList from 'src/components/postLayout/PostList';
-import { config } from 'src/components/SEO/meta';
 import { usePaging } from 'src/utils/customHooks';
 import {
 	ArchiveProps,
@@ -27,18 +25,8 @@ export default function PostListPage({ posts, archive }: PostListPageProps) {
 
 	usePaging(setSelected, setSlicedPosts, setPaging, posts);
 
-	let SEO_TITLE;
-
-	[
-		{ en: 'project', ko: '프로젝트' },
-		{ en: 'til', ko: '공부' },
-	].forEach(name => {
-		if (window.location.pathname.includes(name.en)) SEO_TITLE = name.ko;
-	});
-
 	return (
 		<DefaultLayout maxWidth="xl" isBorder>
-			<NextSeo title={`${SEO_TITLE} | kimzerovirus.log`} />
 			<CustomGrid>
 				<ArchiveList archive={archive} selected={selected} />
 				<PostList posts={slicedPosts} paging={paging} selected={selected} />
@@ -57,5 +45,21 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params: { sub } }: ParamProps) {
-	return readAllFiles((process.env.NEXT_PUBLIC_ROOT_FOLDER + '/' + sub) as string);
+	const data = readAllFiles((process.env.NEXT_PUBLIC_ROOT_FOLDER + '/' + sub) as string);
+	let title = 'kimzerovirus.log';
+	[
+		{ en: 'project', ko: '프로젝트' },
+		{ en: 'til', ko: '공부' },
+	].forEach(name => {
+		if (sub === name.en) title = name.ko + ' | ' + title;
+	});
+
+	return {
+		props: {
+			...data.props,
+			seo: {
+				title,
+			},
+		},
+	};
 }

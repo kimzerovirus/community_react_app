@@ -20,6 +20,11 @@ curl -v -X GET "http://localhost:3000"
 
 위의 두 과정만 만들면 기본적인 마크다운 블로그의 형태를 갖추게 되고 이 외 나머지는 본인의 선호도에 따라 추가 작업 해주면 된다. 예를 들면 기능적인 면에서는 sticky목차나 태그, 검색, 댓글 기능 등이 있을 것이고 디자인적인 면에서는 다크모드와 같은 것들 말이다.
 
+
+Next.js SEO
+_app.tsx 는 서버사이드 데이터이므로 여기서 SEO를 설정해줘야 카카오톡 같은데에서 정상 작동한다. 만약 페이지단에서 설정을 하게 되면 이는 클라이언트 사이드에서 렌더링 될때 자바스크립트를 통해 태그 내용을 교체하는 것이므로 서버사이드 데이터만 취급하는 카카오톡 같은 경우에는 작동하지 않게된다.
+
+
 소스코드 참고 자료
 > https://github.com/vercel/next-learn/tree/master/basics/dynamic-routes-starter
 > https://nextjs.org/learn/basics/dynamic-routes/setup

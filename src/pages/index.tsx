@@ -8,10 +8,6 @@ import DefaultLayout from 'src/components/common/DefaultLayout';
 export default function Home() {
 	return (
 		<DefaultLayout maxWidth="xl">
-			<Head>
-				<title>홈 | kimzerovirus.log</title>
-			</Head>
-
 			{/* mobile */}
 			<Grid container mt={3} sx={{ display: { xs: 'block', sm: 'none' } }}>
 				<Grid item sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -90,3 +86,13 @@ const MainTypo = () => {
 const MainImage = () => {
 	return <Lottie loop animationData={lottieJson} play style={{ width: `100%`, height: `100%` }} />;
 };
+
+export async function getStaticProps() {
+	return {
+		props: {
+			seo: {
+				title: '홈 | kimzerovirus.log',
+			},
+		},
+	};
+}

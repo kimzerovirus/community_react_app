@@ -33,22 +33,20 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }: ParamProps) {
-	const tempdata = getParsedMarkdown({ params });
+	const data = getParsedMarkdown({ params });
 	const reg = /[`~@#$%^&*()_|+\-='",<>\{\}\[\]\\\/]/gim;
-	const title = `${tempdata.props.data.title} | kimzerovirus.log`;
-	const description = tempdata.props.htmlstring.substring(0, 200).replace(reg, '');
+	const title = `${data.props.data.title} | kimzerovirus.log`;
+	const description = data.props.htmlstring.substring(0, 160).replace(reg, '') + '...';
 
-	const data = {
+	return {
 		props: {
-			...tempdata.props,
+			...data.props,
 			seo: {
 				title,
 				description,
 			},
 		},
 	};
-
-	return data;
 }
 
 export default ProjectPostPage;

@@ -1,4 +1,4 @@
-import { DefaultSeo } from 'next-seo';
+import { DefaultSeo, NextSeo } from 'next-seo';
 import { FC } from 'react';
 import { config } from 'src/components/SEO/meta';
 
@@ -10,13 +10,19 @@ interface SEOProps {
 }
 
 const SEO: FC<SEOProps> = ({ seo }) => {
-	const meta: typeof config = { ...config };
-	if (seo) {
-		meta.openGraph.title = seo.title;
-		meta.openGraph.description = seo.description;
-	}
-
-	return <DefaultSeo {...meta} />;
+	console.log(seo);
+	return (
+		<>
+			<DefaultSeo {...config} />
+			{seo ? (
+				<NextSeo
+					title={seo.title}
+					description={seo.description ? seo.description : config.openGraph.description}
+					openGraph={config.openGraph}
+				/>
+			) : null}
+		</>
+	);
 };
 
 export default SEO;

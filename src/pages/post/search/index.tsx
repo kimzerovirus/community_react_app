@@ -79,10 +79,14 @@ const Search: FC<SearchPageProps> = ({ posts }) => {
 export async function getStaticProps() {
 	const project = readAllFiles((process.env.NEXT_PUBLIC_ROOT_FOLDER + '/project') as string);
 	const til = readAllFiles((process.env.NEXT_PUBLIC_ROOT_FOLDER + '/til') as string);
+	const title = '검색 | kimzerovirus.log';
 
 	return {
 		props: {
 			posts: [...project.props.posts, ...til.props.posts],
+			seo: {
+				title,
+			},
 		},
 	};
 }
