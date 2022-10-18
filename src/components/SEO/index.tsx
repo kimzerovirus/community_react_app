@@ -6,13 +6,19 @@ interface SEOProps {
 	seo: {
 		title: string;
 		description: string;
+		url: string;
 	};
 }
 
 const SEO: FC<SEOProps> = ({ seo }) => {
 	return seo ? (
 		<SEOComponent
-			openGraph={{ ...config.openGraph, title: seo.title, description: seo.description }}
+			openGraph={{
+				...config.openGraph,
+				title: seo.title,
+				url: seo.url || config.openGraph.url,
+				description: seo.description || config.openGraph.description,
+			}}
 			twitter={config.twitter}
 		/>
 	) : (

@@ -5,7 +5,8 @@ export const config = {
 	openGraph: {
 		type: 'website',
 		locale: 'ko_KR',
-		url: 'https://kimzerovirus.github.io/',
+		// url: 'https://kimzerovirus.github.io/',
+		url: 'https://kimzerovirus.github.io/post/til/2022/01/01/test',
 		title: 'kimzerovirus.log',
 		description: 'kimzerovirus의 블로그입니다.',
 		site_name: 'Kimzerovirus.log',

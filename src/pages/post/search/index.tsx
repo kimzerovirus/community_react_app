@@ -86,6 +86,7 @@ export async function getStaticProps() {
 			posts: [...project.props.posts, ...til.props.posts],
 			seo: {
 				title,
+				url: 'https://kimzerovirus.github.io/search',
 			},
 		},
 	};

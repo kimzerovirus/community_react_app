@@ -44,6 +44,7 @@ export async function getStaticProps({ params }: ParamProps) {
 			seo: {
 				title,
 				description,
+				url: `https://kimzerovirus.github.io/post/${params.sub}/${params.year}/${params.month}/${params.day}/${params.filename}`,
 			},
 		},
 	};

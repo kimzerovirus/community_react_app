@@ -59,6 +59,7 @@ export async function getStaticProps({ params: { sub } }: ParamProps) {
 			...data.props,
 			seo: {
 				title,
+				url: 'https://kimzerovirus.github.io/post/' + sub,
 			},
 		},
 	};

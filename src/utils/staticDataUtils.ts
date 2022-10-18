@@ -73,6 +73,7 @@ export interface StaticProps {
 	seo?: {
 		title: string;
 		description: string;
+		url: string;
 	};
 }
 
