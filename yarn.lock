@@ -5852,10 +5852,10 @@
   "resolved" "https://registry.npmjs.org/neo-async/-/neo-async-2.6.2.tgz"
   "version" "2.6.2"
 
-"next-sitemap@^3.1.22":
-  "integrity" "sha512-aykbwYTNJ2GKSuxYpXgKK7m/a1Qao03ekUlsNLHvO8XuTTVZDAOe2hGcJtr2vQfXnLeZuSpNUs2IP6hCr4xVZA=="
-  "resolved" "https://registry.npmjs.org/next-sitemap/-/next-sitemap-3.1.22.tgz"
-  "version" "3.1.22"
+"next-sitemap@^3.1.29":
+  "integrity" "sha512-7UQyfpI7obOdB11aCswWYfqRn5CR0YSmWHo1r/uarrFfZD5PyyAWtQlgP6jNqDW0eX1ZJWERBwmJ2dLjl4nT8Q=="
+  "resolved" "https://registry.npmjs.org/next-sitemap/-/next-sitemap-3.1.29.tgz"
+  "version" "3.1.29"
   dependencies:
     "@corex/deepmerge" "^4.0.29"
     "minimist" "^1.2.6"
