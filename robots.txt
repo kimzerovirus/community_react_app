@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://kimzerovirus.github.io
+
+# Sitemaps
+Sitemap: https://kimzerovirus.github.io/sitemap.xml
