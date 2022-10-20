@@ -78,8 +78,7 @@ const TocLi = styled.li<TocLiProps>`
 
 	&.active {
 		margin-left: ${props => props.depth - 6 + 'px'};
-		font-size: 1rem;
-		line-height: 0.875;
+		font-weight: 500;
 		/* font-weight: bold; */
 		/* background-color: rgba(128, 128, 128, 0.36); */
 		/* border-left: 2px solid #6868ac; */
