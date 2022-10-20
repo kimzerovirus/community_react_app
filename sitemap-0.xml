@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="https://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="https://www.w3.org/1999/xhtml" xmlns:mobile="https://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="https://www.google.com/schemas/sitemap-image/1.1" xmlns:video="https://www.google.com/schemas/sitemap-video/1.1">
-<url><loc>https://kimzerovirus.github.io</loc><lastmod>2022-10-20T06:31:24.088Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://kimzerovirus.github.io/post/search</loc><lastmod>2022-10-20T06:31:24.088Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://kimzerovirus.github.io/post/etc</loc><lastmod>2022-10-20T06:31:24.088Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://kimzerovirus.github.io/post/project</loc><lastmod>2022-10-20T06:31:24.088Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://kimzerovirus.github.io/post/til</loc><lastmod>2022-10-20T06:31:24.088Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://kimzerovirus.github.io/post/etc/2022/09/27/Typora사용기</loc><lastmod>2022-10-20T06:31:24.088Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://kimzerovirus.github.io/post/project/2022/09/27/코프링부트 Todo App 만들기 copy 2</loc><lastmod>2022-10-20T06:31:24.088Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://kimzerovirus.github.io/post/project/2022/10/20/Next.js로 만드는 깃블로그</loc><lastmod>2022-10-20T06:31:24.088Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://kimzerovirus.github.io/post/til/2022/01/01/test</loc><lastmod>2022-10-20T06:31:24.088Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://kimzerovirus.github.io</loc><lastmod>2022-10-20T06:33:25.491Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://kimzerovirus.github.io/post/search</loc><lastmod>2022-10-20T06:33:25.491Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://kimzerovirus.github.io/post/etc</loc><lastmod>2022-10-20T06:33:25.491Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://kimzerovirus.github.io/post/project</loc><lastmod>2022-10-20T06:33:25.491Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://kimzerovirus.github.io/post/til</loc><lastmod>2022-10-20T06:33:25.491Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://kimzerovirus.github.io/post/etc/2022/09/27/Typora사용기</loc><lastmod>2022-10-20T06:33:25.491Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://kimzerovirus.github.io/post/project/2022/09/27/코프링부트 Todo App 만들기 copy 2</loc><lastmod>2022-10-20T06:33:25.491Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://kimzerovirus.github.io/post/project/2022/10/20/Next.js로 만드는 깃블로그</loc><lastmod>2022-10-20T06:33:25.491Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://kimzerovirus.github.io/post/project/2022/10/20/Next.js로 만드는 깃블로그 copy 2</loc><lastmod>2022-10-20T06:33:25.491Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://kimzerovirus.github.io/post/project/2022/10/20/Next.js로 만드는 깃블로그 copy 3</loc><lastmod>2022-10-20T06:33:25.491Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://kimzerovirus.github.io/post/project/2022/10/20/Next.js로 만드는 깃블로그 copy 4</loc><lastmod>2022-10-20T06:33:25.491Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://kimzerovirus.github.io/post/project/2022/10/20/Next.js로 만드는 깃블로그 copy 5</loc><lastmod>2022-10-20T06:33:25.491Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://kimzerovirus.github.io/post/project/2022/10/20/Next.js로 만드는 깃블로그 copy</loc><lastmod>2022-10-20T06:33:25.491Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://kimzerovirus.github.io/post/til/2022/01/01/test</loc><lastmod>2022-10-20T06:33:25.491Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 </urlset>
