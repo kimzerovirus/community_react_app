@@ -292,6 +292,7 @@ export const makePostPath = (
 				const day = splitFile[2];
 				const filename = splitFile[3].replace('.md', '');
 				// 출력 예시_) http://localhost:3000/post/{sub}/{year}/{month}/{day}/{filename}
+
 				paths.push({ params: { sub, year, month, day, filename } });
 			});
 		}
