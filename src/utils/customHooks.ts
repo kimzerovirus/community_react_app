@@ -35,10 +35,10 @@ export const usePreventCopy = () => {
 };
 
 // https://github.com/emgoto/emgoto.com/blob/master/src/components/table-of-contents/utils.js
-// export const useIntersectionObserver: VF<ObserverProps> = ({ setActiveId, htmlstring }) => {
+// export const useIntersectionObserver: VF<ObserverProps> = ({ setActiveId, indexes }) => {
 export const useIntersectionObserver = (
 	setActiveId: Dispatch<SetStateAction<string>>,
-	htmlstring: IndexProps[],
+	indexes: IndexProps[],
 ) => {
 	const headingElementsRef = useRef<any>({});
 
@@ -57,7 +57,9 @@ export const useIntersectionObserver = (
 			Object.keys(headingElementsRef.current).forEach(key => {
 				const headingElement = headingElementsRef.current[key];
 
-				if (headingElement.isIntersecting) visibleHeadings.push(headingElement);
+				if (headingElement.isIntersecting) {
+					visibleHeadings.push(headingElement);
+				}
 			});
 
 			// 화면의 아이디 중 최상단 아이디 찾기
@@ -77,9 +79,9 @@ export const useIntersectionObserver = (
 		};
 
 		// header 영역 사이즈, 하단 감시 안할 영역 40%
-		const observer = new IntersectionObserver(callback, {
-			rootMargin: '80px 0px -40% 0px',
-		});
+		// const scope = { rootMargin: '0px 0px -90% 0px' }; // header 영역 빼고 싶으면 첫번째 요소인 margin-top에 80px(헤더 영역 크기)
+		const scope = { rootMargin: '0px 0px -40% 0px' }; // header 영역 빼고 싶으면 첫번째 요소인 margin-top에 80px(헤더 영역 크기)
+		const observer = new IntersectionObserver(callback, scope);
 
 		const headingElements = Array.from(document.querySelectorAll('h2, h3, h4, h5'));
 		headingElements.forEach((element, id) => {
@@ -88,8 +90,20 @@ export const useIntersectionObserver = (
 		});
 
 		return () => observer.disconnect();
-	}, [htmlstring]);
+	}, [indexes]);
 };
+
+// export const useScrollSpy = (
+// 	setActiveId: Dispatch<SetStateAction<string>>,
+// 	indexes: IndexProps[],
+// ) => {
+// 	useEffect(() => {
+// 		const headingElements = Array.from(document.querySelectorAll('h2, h3, h4, h5'));
+// 		window.addEventListener('scroll', () => {
+
+// 		});
+// 	}, [indexes]);
+// };
 
 export const usePaging = (
 	setSelected: Dispatch<SetStateAction<string>>,

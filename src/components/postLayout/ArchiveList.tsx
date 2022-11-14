@@ -34,13 +34,13 @@ const ArchiveBox = styled.div`
 		width: 100%;
 		height: inherit;
 		max-width: 300px;
-		min-height: calc(100vh - 80px);
+		min-height: calc(100vh - 162px); // header, footer 크기 + border 1px * 2
 		border-right: 1px solid rgba(128, 128, 128, 0.36);
 		overflow: visible;
 
 		.sticky {
 			max-height: 100vh;
-			min-height: calc(100vh - 80px);
+			min-height: calc(100vh - 162px);
 			height: auto;
 			overflow: auto;
 
