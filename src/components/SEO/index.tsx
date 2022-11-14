@@ -47,6 +47,8 @@ const SEOComponent: FC<typeof config> = ({ openGraph, twitter }) => (
 		<meta name="twitter:description" content={openGraph.description} />
 		<meta name="twitter:image" content={openGraph.images[0].url} />
 		<meta name="twitter:domain" content={openGraph.site_name} />
+
+		<meta name="google-site-verification" content="PHA3orDagDVbxiIM58MD1vk3YZu_rkeBBietFb3w48M" />
 	</Head>
 );
 
