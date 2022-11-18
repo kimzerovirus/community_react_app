@@ -5,6 +5,9 @@
 }
 
 .markdown-style {
+  line-height: 1.8;
+  font-size: 18px;
+  
   h1,
   h2 {
     margin: 3rem 0 1rem;
@@ -93,6 +96,10 @@
   // 전역에 들어가는 리스트 태그 스타일링
   ul,ol{
     padding-left: 2rem;
+
+    @media (max-width: 760px) {
+      padding-left: 1rem;
+    }
   }
 }
 /* .markdown-style {
