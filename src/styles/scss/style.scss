@@ -98,6 +98,7 @@
     padding-left: 2rem;
 
     @media (max-width: 760px) {
+      // 모바일 화면에서 가독성을 위해 한칸 앞으로 옮김
       padding-left: 1rem;
     }
   }
