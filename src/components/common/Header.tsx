@@ -18,7 +18,7 @@ import {
 const menuList = [
 	{ name: 'home', link: '/' },
 	{ name: 'projects', link: '/post/project' },
-	{ name: 'til', link: '/post/til' },
+	{ name: 'blog', link: '/post/blog' },
 	// { name: 'etc', link: '/post/etc' },
 ];
 
